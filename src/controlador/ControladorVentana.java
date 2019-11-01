@@ -67,7 +67,8 @@ public class ControladorVentana extends PApplet
     public void actualizarEstadoDelPrograma(int estado) {
     	estadoDelPrograma = estado;
     	switch(estadoDelPrograma) {
-    		case 1:
+    		/*case 1:
+                    
                     ((Toggle) ventana.getController("addEstadoNormal")).setState(false);   
                     ((Toggle) ventana.getController("addEstadoFinal")).setState(false);
                     ((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
@@ -75,15 +76,16 @@ public class ControladorVentana extends PApplet
                     ((Toggle) ventana.getController("borrarEstado")).setState(false);
                     println("Estado Inicial");
                     break;
-               /* case 2:
+                    */
+               case 2:
                     ((Toggle) ventana.getController("addEstadoInicial")).setState(false);   
                     ((Toggle) ventana.getController("addEstadoFinal")).setState(false);
                     ((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
                     ((Toggle) ventana.getController("moverEstado")).setState(false);
                     ((Toggle) ventana.getController("borrarEstado")).setState(false);
-                    println("Estado Normal");        		
+                    println("Estado Normal");
                     break;
-                case 3:
+                /*case 3:
                     ((Toggle) ventana.getController("addEstadoInicial")).setState(false);   
                     ((Toggle) ventana.getController("addEstadoNormal")).setState(false);
                     ((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
