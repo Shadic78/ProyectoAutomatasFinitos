@@ -59,12 +59,14 @@ public class Main extends PApplet {
     	noStroke();
     	fill(255, 218, 143);
         
-    	rect(width - 160, 0, 160, height);
+    	rect(width - 300, 0, 300, height);
         fill(50, 50 ,50);
-        rect(width - 85, 0, 160, 65);
-        fill(0, 0, 0);
         
-        text("Agregar estado", width-85, 65 );
+        //Etiquetas para el menu
+        fill(0, 0, 0);
+        text("Menu", width-130, 40 );
+        text("Agregar estados: ", width-130, 65 );
+        text("Agregar Conexiones:", width-130, 260 );
     	
     	//automata1.imprimirEstados();
     	
