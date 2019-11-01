@@ -12,7 +12,7 @@ import processing.core.PApplet;
  *
  * @author Usuario
  */
-public class VentanaPrincipal {
+public class VentanaPrincipal extends PApplet{
     public ControlP5 button;
     private PApplet parent;
     
@@ -26,22 +26,23 @@ public class VentanaPrincipal {
     }
     
     public void setButtons(ControlP5 b){
-        b.addToggle("AddEstado")
+        
+        b.addToggle("Estadoinicial")
     	.setPosition(parent.width - 130, 80)
     	.setSize(100,40)
-    	.setLabel("Agregar estado")
+    	.setLabel("Estado inicial")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER); 
     	
-    	b.addToggle("AddEstadoInicial")
+    	b.addToggle("EstadoNormal")
     	.setPosition(parent.width - 130, 140)
     	.setSize(100,40)
-    	.setLabel("AddEstadoInicial")
+    	.setLabel("Estado normal")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);     
 
-        b.addToggle("AddEstadoFinal")
+        b.addToggle("EstadoFinal")
     	.setPosition(parent.width - 130, 200)
     	.setSize(100,40)
-    	.setLabel("AddEstadoFinal")
+    	.setLabel("Estado final")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER); 
     }
         
