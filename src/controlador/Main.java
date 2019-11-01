@@ -8,6 +8,7 @@ package controlador;
 import controlP5.ControlP5;
 import modelo.*;
 import processing.core.PApplet;
+import processing.core.PFont;
 import vista.*;
 
 /**
@@ -64,9 +65,12 @@ public class Main extends PApplet {
         
         //Etiquetas para el menu
         fill(0, 0, 0);
-        text("Menu", width-130, 40 );
-        text("Agregar estados: ", width-130, 65 );
+        PFont f = createFont("Georgia", 25);
+        textFont(f);
+        text("Menu", width-130, 20 );
+        text("Agregar estados: ", width-130, 60 );
         text("Agregar Conexiones:", width-130, 260 );
+        text("Ejecutar Automata:", width-130, 460)
     	
     	//automata1.imprimirEstados();
     	
