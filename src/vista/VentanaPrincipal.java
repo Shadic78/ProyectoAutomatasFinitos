@@ -57,9 +57,34 @@ public class VentanaPrincipal extends PApplet{
     	.setLabel("Mover Estado")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
          
-        b.addTextfield("Escribe tu palabra").setPosition(parent.width-200, 500)
-        .setSize(130,20).setAutoClear(true);
-        b.addBang("Summit").setPosition(parent.width-80, 500).setSize(30, 20);
+         b.addToggle("ConexionNormal")
+        .setPosition(parent.width - 250, 290)
+    	.setSize(100,40)
+    	.setLabel("Conexión Normal")
+    	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
+         
+         b.addToggle("ConexionBucle")
+        .setPosition(parent.width - 130, 290)
+    	.setSize(100,40)
+    	.setLabel("Conexión bucle")
+    	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
+         
+          b.addToggle("BorrarConexion")
+        .setPosition(parent.width - 190, 350)
+    	.setSize(100,40)
+    	.setLabel("Borrar Conexi" + (char)162 + "n")
+    	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
+         
+          b.addToggle("PasoEjecucion")
+        .setPosition(parent.width - 190, 580)
+    	.setSize(100,40)
+    	.setLabel("Paso A Paso")
+    	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER); 
+          
+          
+        b.addTextfield("Escribe tu palabra").setPosition(parent.width-220, 500)
+        .setSize(130,35).setAutoClear(true);
+        b.addBang("Iniciar/Denetenr").setPosition(parent.width-80, 500).setSize(40, 35);
     }
         
 
