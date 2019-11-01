@@ -6,6 +6,8 @@
 package controlador;
 
 import controlP5.ControlP5;
+import javax.swing.JFrame;
+import javax.swing.JTextField;
 import modelo.*;
 import processing.core.PApplet;
 import processing.core.PFont;
@@ -22,6 +24,7 @@ public class Main extends PApplet {
 	boolean AddEstado = false;
 	boolean AddEstadoInicial = false;
 	AutomataFinito automata1;
+       
 	
 	/* Variable que controla el estado global del programa
 	 * 0 - Default
@@ -51,6 +54,7 @@ public class Main extends PApplet {
     	textAlign(CENTER, CENTER);
     	textSize(14);
     	noStroke();    	
+        
     }
     
     public void draw(){
@@ -67,10 +71,12 @@ public class Main extends PApplet {
         fill(0, 0, 0);
         PFont f = createFont("Georgia", 25);
         textFont(f);
-        text("Menu", width-130, 20 );
+        text("Menu", width-130, 15 );
         text("Agregar estados: ", width-130, 60 );
         text("Agregar Conexiones:", width-130, 260 );
-        text("Ejecutar Automata:", width-130, 460)
+        text("Ejecutar Automata:", width-130, 460);
+        
+        
     	
     	//automata1.imprimirEstados();
     	

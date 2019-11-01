@@ -56,6 +56,10 @@ public class VentanaPrincipal extends PApplet{
     	.setSize(100,40)
     	.setLabel("Mover Estado")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
+         
+        b.addTextfield("Escribe tu palabra").setPosition(parent.width-200, 500)
+        .setSize(130,20).setAutoClear(true);
+        b.addBang("Summit").setPosition(parent.width-80, 500).setSize(30, 20);
     }
         
 
