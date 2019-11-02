@@ -38,16 +38,16 @@ public class ControladorVentana extends PApplet {
         background(232, 233, 234);
         noStroke();
         fill(255, 218, 143);
-        rect(width - 300, 0, 300, height);
+        rect(width - 360, 0, 360, height);
         fill(0, 0, 0);
 
         //Etiquetas del menu
         PFont f = createFont("Georgia", 25);
         textFont(f);
-        text("Menu", width - 130, 15);
-        text("Agregar estados: ", width - 130, 60);
-        text("Agregar Conexiones:", width - 130, 260);
-        text("Ejecutar Automata:", width - 130, 460);
+        text("Menu", width - 180, 15);
+        text("Agregar estados: ", width - 225, 60);
+        text("Agregar Conexiones:", width - 210, 270);
+        text("Ejecutar Automata:", width - 225, 430);
 
         automata.imprimirEstados();
 
@@ -57,23 +57,23 @@ public class ControladorVentana extends PApplet {
 
     @Override
     public void mouseClicked() {
-        if (mouseX < width - 360) {
+        if (mouseX < width - 390) {
             switch (estadoDelPrograma) {
                 case 1:
-                    EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY, 100), "EstadoInicial");
+                    EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY, 80), "EstadoInicial");
                     automata.agregarEstado(estadoInicial);
                     break;
                 case 2:
-                    EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY, 100), "EstadoNormal");
+                    EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY, 80), "EstadoNormal");
                     automata.agregarEstado(estadoNormal);
                     break;
 
                 case 3:
-                    EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY, 100), "EstadoFinal");
+                    EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY, 80), "EstadoFinal");
                     automata.agregarEstado(estadoFinal);
                     break;
                 case 4:
-                    EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY, 100), "EstadoInicialFinal");
+                    EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY, 80), "EstadoInicialFinal");
                     automata.agregarEstado(estadoInicialFinal);
                     break;
                 default:
