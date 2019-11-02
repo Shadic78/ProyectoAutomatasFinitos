@@ -11,9 +11,10 @@ import processing.core.PApplet;
  *
  * @author emman
  */
-public class EstadoInicial extends Estado{
-     public EstadoInicial(PApplet p, Punto vertice, String nombre) {
-        super(p, vertice, nombre);
+public class EstadoInicial extends Estado {
+    
+     public EstadoInicial(PApplet p, Punto punto, String nombre) {
+        super(p, punto, nombre);
     }
 
     @Override
@@ -22,14 +23,17 @@ public class EstadoInicial extends Estado{
         parent.fill(81, 237, 236);
         parent.strokeWeight(5);
         parent.stroke(70, 206, 205);
-        parent.ellipse(super.getVertice().getX(), super.getVertice().getY(), super.getVertice().getRadio(), super.getVertice().getRadio());
+        parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), radio * 2, radio * 2);
        
-        parent.fill(232, 233, 234);
-        parent.strokeWeight(3);
-        parent.triangle(super.getVertice().getX()-50, super.getVertice().getY(), super.getVertice().getX()-60, super.getVertice().getY()+30, super.getVertice().getX()-60, super.getVertice().getY()-30);
+        parent.fill(81, 237, 236);
+        parent.strokeWeight(2);
+        parent.triangle(super.getCoordenadas().getX() - radio * 2, super.getCoordenadas().getY() - radio, 
+                super.getCoordenadas().getX() - radio - 5, super.getCoordenadas().getY(), 
+                super.getCoordenadas().getX() - radio * 2, super.getCoordenadas().getY() + radio);
       
         parent.fill(0);
-        parent.text(super.getNombre(), super.getVertice().getX(), super.getVertice().getY());
+        parent.textSize(16);
+        parent.text(super.getNombre(), super.getCoordenadas().getX(), super.getCoordenadas().getY());
     }
     
     
