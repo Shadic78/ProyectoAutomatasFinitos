@@ -27,6 +27,7 @@ public class EstadoFinal extends Estado {
         parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), (radio * 2) - 10, (radio * 2) - 10);
         
         parent.fill(0);
+        parent.textSize(16);        
         parent.text(super.getNombre(), super.getCoordenadas().getX(), super.getCoordenadas().getY());
     }
     

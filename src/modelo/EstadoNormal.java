@@ -14,7 +14,9 @@ public class EstadoNormal extends Estado {
         parent.strokeWeight(5);
         parent.stroke(70, 206, 205);
         parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), radio * 2, radio * 2);
+
         parent.fill(0);
+        parent.textSize(16);        
         parent.text(super.getNombre(), super.getCoordenadas().getX(), super.getCoordenadas().getY());
     }
 

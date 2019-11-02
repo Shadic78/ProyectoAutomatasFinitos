@@ -18,11 +18,12 @@ public class ControladorVentana extends PApplet {
     @Override
     public void settings() {
         fullScreen();
+        //size(640, 480);
     }
    
     @Override
     public void setup() {
-        fuenteMenu = createFont("Georgia", 25);
+        fuenteMenu = createFont("Georgia", 23);
         
         VentanaPrincipal ventana1 = new VentanaPrincipal(this);
         
@@ -54,55 +55,72 @@ public class ControladorVentana extends PApplet {
         automata1.imprimirEstados();    	
 
         fill(0);
+        textSize(16);
         text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);    }
    
     @Override
     public void mouseClicked() {
         // Este if es para que no pongan vertices en el area donde estan los botones
-        if (mouseX < width - 150) {
+        if (mouseX < width - 300) {
             // De acuerdo al estado del programa se hace una cosa u otra
             switch (controladorPrograma.getEstadoDelPrograma()) {
-                case 1: // Agregar estado normal
-                    Estado estadoNuevo = new Estado(this, mouseX, mouseY, "VerticeNuevo");
-                    automata1.agregarEstado(estadoNuevo);
+                case 1: // Agregar estado inicial
+                    EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY) , "VerticeNuevo");
+                    automata1.agregarEstado(estadoInicial);
                     break;
-                case 2: // Mover vertices
-                    println("mouseclicked 2");
+                    
+                case 2: // Agregar estado normal
+                    EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY) , "VerticeNuevo");
+                    automata1.agregarEstado(estadoNormal);
                     break;
-                case 3: // Borrar vertices
+                    
+                case 3: // Agregar estado final
+                    EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY) , "VerticeNuevo");
+                    automata1.agregarEstado(estadoFinal);                    
                     break;
-                case 4: // Primer click para agregar una conexion entre estados
+                    
+                case 4: // Agregar estado inicial-final
+                    println("agregar estado inicial-final");                 
+                    break;   
+                    
+                case 6: // Borrar estado
+                    println("Borrando estado");
+                    break;
+                    
+                case 7: // Primer click para agregar una conexion entre estados
                     if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick1(automata1.getEstadoClickeado());
-                        controladorPrograma.actualizarEstadoDelPrograma(5);
+                        controladorPrograma.actualizarEstadoDelPrograma(8);
                         println("estado id: " + controladorPrograma.getEstadoClick1());
                     }
                     break;
-                case 5: // Segundo click para agregar una conexion entre estados
+                    
+                case 8: // Segundo click para agregar una conexion entre estados
                     if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick2(automata1.getEstadoClickeado());
+                        println("estado id2: " + controladorPrograma.getEstadoClick2());                        
                         automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), "a");
-                        println("estado id2: " + controladorPrograma.getEstadoClick2());
                         controladorPrograma.setEstadoClick1(-1);
                         controladorPrograma.setEstadoClick2(-1);
-                        controladorPrograma.actualizarEstadoDelPrograma(4);
+                        controladorPrograma.actualizarEstadoDelPrograma(7);
                     }
                     break;
+                    
                 default:
-                    println("mouseclicked default");
+                    println("mouseclicked estado default");
             }
         }
     }
     
     public void mouseDragged() {
-        if (controladorPrograma.getEstadoDelPrograma() == 2) {
+        if (controladorPrograma.getEstadoDelPrograma() == 5) {
             if (!controladorPrograma.getMoviendoEstado()) {
                 controladorPrograma.setEstadoMoviendoID(automata1.getEstadoClickeado());
             }
             if (controladorPrograma.getEstadoMoviendoID() >= 0) {
                 controladorPrograma.setMoviendoEstado(true);
-                automata1.listaEstados.get(controladorPrograma.getEstadoMoviendoID()).setX(mouseX);
-                automata1.listaEstados.get(controladorPrograma.getEstadoMoviendoID()).setY(mouseY);
+                automata1.listaEstados.get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setX(mouseX);
+                automata1.listaEstados.get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setY(mouseY);
             }
         }
     }
@@ -167,6 +185,16 @@ public class ControladorVentana extends PApplet {
         }
     }
 
+    public void BtnBorrarEstado() {
+        if (((Toggle) ventana.getController("BtnBorrarEstado")).isMousePressed()) {
+            if (((Toggle) ventana.getController("BtnBorrarEstado")).getState() == true) {
+                controladorPrograma.actualizarEstadoDelPrograma(6);
+            } else {
+                controladorPrograma.actualizarEstadoDelPrograma(0);
+            }
+        }
+    } 
+    
     public void BtnAddConexionNormal() {
         if (((Toggle) ventana.getController("BtnAddConexionNormal")).isMousePressed() && automata1.listaEstados.size() >= 2) {
             if (((Toggle) ventana.getController("BtnAddConexionNormal")).getState() == true) {
@@ -176,6 +204,27 @@ public class ControladorVentana extends PApplet {
             }
         }
     }
+       
+    public void BtnAddConexionBucle() {
+        if (((Toggle) ventana.getController("BtnAddConexionBucle")).isMousePressed()) {
+            if (((Toggle) ventana.getController("BtnAddConexionBucle")).getState() == true) {
+                controladorPrograma.actualizarEstadoDelPrograma(9);
+            } else {
+                controladorPrograma.actualizarEstadoDelPrograma(0);
+            }
+        }
+    }  
+    
+    public void BtnAddBorrarConexion() {
+        if (((Toggle) ventana.getController("BtnAddBorrarConexion")).isMousePressed()) {
+            if (((Toggle) ventana.getController("BtnAddBorrarConexion")).getState() == true) {
+                controladorPrograma.actualizarEstadoDelPrograma(10);
+            } else {
+                controladorPrograma.actualizarEstadoDelPrograma(0);
+            }
+        }
+    }         
+    
     /**
      * ****** FIN EVENTOS DE LOS BOTONES *******
      */  

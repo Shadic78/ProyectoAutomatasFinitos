@@ -39,6 +39,14 @@ public abstract  class Estado {
         this.parent = parent;
     }
 
+    public int getRadio() {
+        return radio;
+    }
+
+    public void setRadio(int radio) {
+        this.radio = radio;
+    }
+
     public abstract void show();
 
 }

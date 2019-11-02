@@ -36,7 +36,7 @@ public class AutomataFinito {
     public int getEstadoClickeado() {
         int estadoClickeado = -1;
         for (int i = 0; i < listaEstados.size(); i++) {
-            if (distanciaEntrePuntos(listaEstados.get(i).getX(), listaEstados.get(i).getY(),
+            if (distanciaEntrePuntos(listaEstados.get(i).getCoordenadas().getX(), listaEstados.get(i).getCoordenadas().getY(),
                     parent.mouseX, parent.mouseY) <= this.listaEstados.get(i).getRadio()) {
                 estadoClickeado = i;
                 break;
@@ -51,11 +51,20 @@ public class AutomataFinito {
 
     public void agregarConexion(int estado1, int estado2, String condicion) {
         // Si la conexion ya existe
-        if (matrizDeCondiciones[estado1][estado2] != "-") {
+        if (!matrizDeCondiciones[estado1][estado2].equals("-")) {
 
         } else {
             matrizDeCondiciones[estado1][estado2] = condicion;
-            //listaConexiones.add(new ConexionCurva(parent, listaEstados.get(estado1), listaEstados.get(estado2), condicion));
+            // Conexion normal
+            if(estado1 != estado2) {
+                PApplet.println("Estado1: " + estado1 + " | Estado2: " + estado2);
+                listaConexiones.add(new ConexionNormal(parent, listaEstados.get(estado1), listaEstados.get(estado2), condicion));                
+            }
+            // Conexion bucle
+            else {
+                parent.println("AutomataFinito agregar conexion bucle");
+            }
+            
         }
     }
 

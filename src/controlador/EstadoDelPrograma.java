@@ -16,7 +16,8 @@ public class EstadoDelPrograma {
      * 7 - Agregar conexion normal (Al dar click a un estado el estado del programa cambia a 8)
      * 8 - (Dar click en el segundo estado para agregar una conexion)
      * 9 - Agregar conexion bucle    
-     * 10 - Borrar conexion
+     * 10 - Borrar conexion (Primer click)
+     * 11 - Borrar conexion (segundo click)
      */
     private int estadoDelPrograma = 0;
 	
@@ -83,25 +84,133 @@ public class EstadoDelPrograma {
         // Desactiva los botones que no hayas presionado de acuerdo al estado del programa
         switch(estadoDelPrograma) {
             case 1:
-                ((Toggle) ventana.getController("MoverEstado")).setState(false);
-        	((Toggle) ventana.getController("AgregarConexion")).setState(false);           		
+                //((Toggle) ventana.getController("BtnAddEstadoInicial")).setState(false);                
+                ((Toggle) ventana.getController("BtnAddEstadoNormal")).setState(false);
+        	((Toggle) ventana.getController("BtnAddEstadoFinal")).setState(false);       
+        	((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnMoverEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnBorrarEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionNormal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionBucle")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddBorrarConexion")).setState(false);      
+        	((Toggle) ventana.getController("BtnAddPasoEjecucion")).setState(false);           		
         	PApplet.println("Estado 1");        		
         	break;
+                
             case 2: 
-        	((Toggle) ventana.getController("AddEstado")).setState(false);
-        	((Toggle) ventana.getController("AgregarConexion")).setState(false);           		
+                ((Toggle) ventana.getController("BtnAddEstadoInicial")).setState(false);                
+                //((Toggle) ventana.getController("BtnAddEstadoNormal")).setState(false);
+        	((Toggle) ventana.getController("BtnAddEstadoFinal")).setState(false);       
+        	((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnMoverEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnBorrarEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionNormal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionBucle")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddBorrarConexion")).setState(false);      
+        	((Toggle) ventana.getController("BtnAddPasoEjecucion")).setState(false);       		
         	PApplet.println("Estado 2");        		
         	break;
+                
             case 3:
+                ((Toggle) ventana.getController("BtnAddEstadoInicial")).setState(false);                
+                ((Toggle) ventana.getController("BtnAddEstadoNormal")).setState(false);
+        	//((Toggle) ventana.getController("BtnAddEstadoFinal")).setState(false);       
+        	((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnMoverEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnBorrarEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionNormal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionBucle")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddBorrarConexion")).setState(false);      
+        	((Toggle) ventana.getController("BtnAddPasoEjecucion")).setState(false);   
+        	PApplet.println("Estado 2");        		                
     	break;
+        
             case 4:
-        	((Toggle) ventana.getController("MoverEstado")).setState(false);       			
-        	((Toggle) ventana.getController("AddEstado")).setState(false);   	
+                ((Toggle) ventana.getController("BtnAddEstadoInicial")).setState(false);                
+                ((Toggle) ventana.getController("BtnAddEstadoNormal")).setState(false);
+        	((Toggle) ventana.getController("BtnAddEstadoFinal")).setState(false);       
+        	//((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnMoverEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnBorrarEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionNormal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionBucle")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddBorrarConexion")).setState(false);      
+        	((Toggle) ventana.getController("BtnAddPasoEjecucion")).setState(false);   
         	PApplet.println("Estado 4");    			
     	break;
+        
+            case 5:
+                ((Toggle) ventana.getController("BtnAddEstadoInicial")).setState(false);                
+                ((Toggle) ventana.getController("BtnAddEstadoNormal")).setState(false);
+        	((Toggle) ventana.getController("BtnAddEstadoFinal")).setState(false);       
+        	((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).setState(false);           		
+        	//((Toggle) ventana.getController("BtnMoverEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnBorrarEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionNormal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionBucle")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddBorrarConexion")).setState(false);      
+        	((Toggle) ventana.getController("BtnAddPasoEjecucion")).setState(false);   
+        	PApplet.println("Estado 5");        		                
+                break;
+                
+            case 6:
+                ((Toggle) ventana.getController("BtnAddEstadoInicial")).setState(false);                
+                ((Toggle) ventana.getController("BtnAddEstadoNormal")).setState(false);
+        	((Toggle) ventana.getController("BtnAddEstadoFinal")).setState(false);       
+        	((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnMoverEstado")).setState(false);           		
+        	//((Toggle) ventana.getController("BtnBorrarEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionNormal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionBucle")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddBorrarConexion")).setState(false);      
+        	((Toggle) ventana.getController("BtnAddPasoEjecucion")).setState(false);  
+        	PApplet.println("Estado 6");        		                
+                break;
+                
+            case 7:
+                ((Toggle) ventana.getController("BtnAddEstadoInicial")).setState(false);                
+                ((Toggle) ventana.getController("BtnAddEstadoNormal")).setState(false);
+        	((Toggle) ventana.getController("BtnAddEstadoFinal")).setState(false);       
+        	((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnMoverEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnBorrarEstado")).setState(false);           		
+        	//((Toggle) ventana.getController("BtnAddConexionNormal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionBucle")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddBorrarConexion")).setState(false);      
+        	((Toggle) ventana.getController("BtnAddPasoEjecucion")).setState(false); 
+        	PApplet.println("Estado 7");        		                
+                break;
+                
+            case 9:
+                ((Toggle) ventana.getController("BtnAddEstadoInicial")).setState(false);                
+                ((Toggle) ventana.getController("BtnAddEstadoNormal")).setState(false);
+        	((Toggle) ventana.getController("BtnAddEstadoFinal")).setState(false);       
+        	((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnMoverEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnBorrarEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionNormal")).setState(false);           		
+        	//((Toggle) ventana.getController("BtnAddConexionBucle")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddBorrarConexion")).setState(false);      
+        	((Toggle) ventana.getController("BtnAddPasoEjecucion")).setState(false); 
+        	PApplet.println("Estado 9");        		                
+                break;  
+                
+            case 10:
+                ((Toggle) ventana.getController("BtnAddEstadoInicial")).setState(false);                
+                ((Toggle) ventana.getController("BtnAddEstadoNormal")).setState(false);
+        	((Toggle) ventana.getController("BtnAddEstadoFinal")).setState(false);       
+        	((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnMoverEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnBorrarEstado")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionNormal")).setState(false);           		
+        	((Toggle) ventana.getController("BtnAddConexionBucle")).setState(false);           		
+        	//((Toggle) ventana.getController("BtnAddBorrarConexion")).setState(false);      
+        	((Toggle) ventana.getController("BtnAddPasoEjecucion")).setState(false); 
+        	PApplet.println("Estado 10");        		                
+                break;                
             default:
-        	PApplet.println("Estado default");
-        }    	
+                PApplet.println("Estado default");
+        }
     }
     
 }

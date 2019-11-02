@@ -25,14 +25,15 @@ public class EstadoInicial extends Estado {
         parent.stroke(70, 206, 205);
         parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), radio * 2, radio * 2);
        
-        parent.fill(232, 233, 234);
-        parent.strokeWeight(3);
-        parent.triangle(super.getCoordenadas().getX() - 50, super.getCoordenadas().getY(), 
-                super.getCoordenadas().getX() - 60, super.getCoordenadas().getY() + 30, 
-                super.getCoordenadas().getX() - 60, super.getCoordenadas().getY() - 30);
+        parent.fill(81, 237, 236);
+        parent.strokeWeight(2);
+        parent.triangle(super.getCoordenadas().getX() - radio * 2, super.getCoordenadas().getY() - radio, 
+                super.getCoordenadas().getX() - radio - 5, super.getCoordenadas().getY(), 
+                super.getCoordenadas().getX() - radio * 2, super.getCoordenadas().getY() + radio);
       
         parent.fill(0);
-        parent.text(super.getNombre(), super.getCoordenadas().getX(), super.getCoordenadas().getX());
+        parent.textSize(16);
+        parent.text(super.getNombre(), super.getCoordenadas().getX(), super.getCoordenadas().getY());
     }
     
     

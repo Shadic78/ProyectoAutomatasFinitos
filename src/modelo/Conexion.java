@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import processing.core.PApplet;
+
 /**
  *
  * @author Usuario
@@ -12,8 +14,10 @@ package modelo;
 public abstract class Conexion {
     private Estado origen;
     private Estado destino;
+    public PApplet parent;
 
-    public Conexion(Estado origen, Estado destino) {
+    public Conexion(PApplet p, Estado origen, Estado destino) {
+        this.parent = p;
         this.origen = origen;
         this.destino = destino;
     }
@@ -32,6 +36,14 @@ public abstract class Conexion {
 
     public void setDestino(Estado destino) {
         this.destino = destino;
+    }
+
+    public PApplet getParent() {
+        return parent;
+    }
+
+    public void setParent(PApplet parent) {
+        this.parent = parent;
     }
     
     public abstract void show();

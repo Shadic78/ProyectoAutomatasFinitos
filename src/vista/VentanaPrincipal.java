@@ -59,21 +59,21 @@ public class VentanaPrincipal{
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);        
  
          b.addToggle("BtnAddConexionNormal")
-        .setPosition(parent.width - 250, 290)
+        .setPosition(parent.width - 260, 290)
     	.setSize(100,40)
-    	.setLabel("Conexión Normal")
+    	.setLabel("Conexion Normal")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
          
          b.addToggle("BtnAddConexionBucle")
-        .setPosition(parent.width - 130, 290)
+        .setPosition(parent.width - 140, 290)
     	.setSize(100,40)
-    	.setLabel("Conexión bucle")
+    	.setLabel("Conexion bucle")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
          
           b.addToggle("BtnAddBorrarConexion")
-        .setPosition(parent.width - 190, 350)
+        .setPosition(parent.width - 200, 350)
     	.setSize(100,40)
-    	.setLabel("Borrar Conexi" + (char)162 + "n")
+    	.setLabel("Borrar Conexion")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
          
           b.addToggle("BtnAddPasoEjecucion")
