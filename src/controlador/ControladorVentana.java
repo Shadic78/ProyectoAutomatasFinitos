@@ -10,10 +10,9 @@ import vista.*;
 
 public class ControladorVentana extends PApplet
 {
-    int estadoDelPrograma = 0;
+    int estadoDelPrograma = 3;
     AutomataFinito automata;
     ControlP5 ventana;
-    public ControlP5 cp5;
     
     @Override
     public void settings()
@@ -26,7 +25,7 @@ public class ControladorVentana extends PApplet
     @Override
     public void setup()
     {
-        super.setup();
+        //super.setup();
         VentanaPrincipal ventana1 = new VentanaPrincipal(this);
         
         ventana = ventana1.getButton();
@@ -62,13 +61,20 @@ public class ControladorVentana extends PApplet
    
     @Override
     public void mouseClicked() {
-    	if(mouseX < width - 150) {
+    	if(mouseX < width - 360) {
         	switch(estadoDelPrograma) {
 	    		case 1: 
+                            EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY, 100), "EstadoInicial");
+                            automata.agregarEstado(estadoInicial);
                             break;
                         case 2:
-                            EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY, 100), "VerticeNuevo");
+                            EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY, 100), "EstadoNormal");
                             automata.agregarEstado(estadoNormal);
+                            break;
+                            
+                        case 3:
+                            EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY, 100), "EstadoFinal");
+                            automata.agregarEstado(estadoFinal);
                             break;
                         default:
                             break;
@@ -79,33 +85,33 @@ public class ControladorVentana extends PApplet
     public void actualizarEstadoDelPrograma(int estado) {
     	estadoDelPrograma = estado;
     	switch(estadoDelPrograma) {
-    		/*case 1:
+    		case 1:
                     
-                    ((Toggle) ventana.getController("addEstadoNormal")).setState(false);   
-                    ((Toggle) ventana.getController("addEstadoFinal")).setState(false);
-                    ((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
-                    ((Toggle) ventana.getController("moverEstado")).setState(false);
-                    ((Toggle) ventana.getController("borrarEstado")).setState(false);
+                    ((Toggle) ventana.getController("EstadoNormal")).setState(false);   
+                    ((Toggle) ventana.getController("EstadoFinal")).setState(false);
+                    //((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
+                    ((Toggle) ventana.getController("MoverEstado")).setState(false);
+                    ((Toggle) ventana.getController("BorrarEstado")).setState(false);
                     println("Estado Inicial");
                     break;
-                    */
+
                case 2:
                     ((Toggle) ventana.getController("EstadoInicial")).setState(false);   
                     ((Toggle) ventana.getController("EstadoFinal")).setState(false);
-                    ((Toggle) ventana.getController("EstadoInicialFinal")).setState(false);
+                    //((Toggle) ventana.getController("EstadoInicialFinal")).setState(false);
                     ((Toggle) ventana.getController("MoverEstado")).setState(false);
                     ((Toggle) ventana.getController("BorrarEstado")).setState(false);
                     println("Estado Normal");
                     break;
-                /*case 3:
-                    ((Toggle) ventana.getController("addEstadoInicial")).setState(false);   
-                    ((Toggle) ventana.getController("addEstadoNormal")).setState(false);
-                    ((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
-                    ((Toggle) ventana.getController("moverEstado")).setState(false);
-                    ((Toggle) ventana.getController("borrarEstado")).setState(false);
+                case 3:
+                    ((Toggle) ventana.getController("EstadoInicial")).setState(true);   
+                    ((Toggle) ventana.getController("EstadoNormal")).setState(false);
+                    //((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
+                    ((Toggle) ventana.getController("MoverEstado")).setState(false);
+                    ((Toggle) ventana.getController("BorrarEstado")).setState(false);
                     println("Estado Final");
                     break;
-                case 4:
+                /*case 4:
                     ((Toggle) ventana.getController("addEstadoInicial")).setState(false);   
                     ((Toggle) ventana.getController("addEstadoNormal")).setState(false);
                     ((Toggle) ventana.getController("addEstadoFinal")).setState(false);
@@ -136,6 +142,16 @@ public class ControladorVentana extends PApplet
     }
     
     public void addEstadoInicial() {
+         if(((Toggle)ventana.getController("EstadoInicial")).isMousePressed()) {
+        	if(((Toggle)ventana.getController("EstadoInicial")).getState() == true) {
+                    
+                    actualizarEstadoDelPrograma(1);
+                    
+                }
+        	else {
+                    actualizarEstadoDelPrograma(0);
+        	}    		
+    	}
     	
     } 
     
