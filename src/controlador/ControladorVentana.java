@@ -6,6 +6,7 @@ import processing.core.PApplet;
 import static processing.core.PApplet.println;
 import modelo.*;
 import vista.*;
+
 public class ControladorVentana extends PApplet
 {
     int estadoDelPrograma = 0;
@@ -27,7 +28,7 @@ public class ControladorVentana extends PApplet
         super.setup();
         VentanaPrincipal ventana1 = new VentanaPrincipal(this);
         
-        ventana = ventana1.getControlVentanaPrincipal();
+        ventana = ventana1.getButton();
         automata = new AutomataFinito(this);
         
         textAlign(CENTER, CENTER);
@@ -78,11 +79,11 @@ public class ControladorVentana extends PApplet
                     break;
                     */
                case 2:
-                    ((Toggle) ventana.getController("addEstadoInicial")).setState(false);   
-                    ((Toggle) ventana.getController("addEstadoFinal")).setState(false);
-                    ((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
-                    ((Toggle) ventana.getController("moverEstado")).setState(false);
-                    ((Toggle) ventana.getController("borrarEstado")).setState(false);
+                    ((Toggle) ventana.getController("EstadoInicial")).setState(false);   
+                    ((Toggle) ventana.getController("EstadoFinal")).setState(false);
+                    ((Toggle) ventana.getController("EstadoInicialFinal")).setState(false);
+                    ((Toggle) ventana.getController("MoverEstado")).setState(false);
+                    ((Toggle) ventana.getController("BorrarEstado")).setState(false);
                     println("Estado Normal");
                     break;
                 /*case 3:
@@ -129,8 +130,8 @@ public class ControladorVentana extends PApplet
     
     public void addEstadoNormal()
     {
-        if(((Toggle)ventana.getController("addEstadoNormal")).isMousePressed()) {
-        	if(((Toggle)ventana.getController("addEstadoNormal")).getState() == true) {
+        if(((Toggle)ventana.getController("EstadoNormal")).isMousePressed()) {
+        	if(((Toggle)ventana.getController("EstadoNormal")).getState() == true) {
                     actualizarEstadoDelPrograma(2);
                 }
         	else {
@@ -141,8 +142,8 @@ public class ControladorVentana extends PApplet
     
     public void addEstadoFinal()
     {
-        if(((Toggle)ventana.getController("addEstadoFinal")).isMousePressed()) {
-        	if(((Toggle)ventana.getController("addEstadoFinal")).getState() == true) {
+        if(((Toggle)ventana.getController("EstadoFinal")).isMousePressed()) {
+        	if(((Toggle)ventana.getController("EstadoFinal")).getState() == true) {
         		actualizarEstadoDelPrograma(3);
         	}   
         	else {
