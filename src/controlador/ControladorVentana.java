@@ -87,8 +87,8 @@ public class ControladorVentana extends PApplet
     	switch(estadoDelPrograma) {
     		case 1:
                     
-                    ((Toggle) ventana.getController("EstadoNormal")).setState(false);   
-                    ((Toggle) ventana.getController("EstadoFinal")).setState(false);
+                    ((Toggle) ventana.getController("addEstadoNormal")).setState(false);   
+                    ((Toggle) ventana.getController("addEstadoFinal")).setState(false);
                     //((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
                     ((Toggle) ventana.getController("MoverEstado")).setState(false);
                     ((Toggle) ventana.getController("BorrarEstado")).setState(false);
@@ -96,17 +96,17 @@ public class ControladorVentana extends PApplet
                     break;
 
                case 2:
-                    ((Toggle) ventana.getController("EstadoInicial")).setState(false);   
-                    ((Toggle) ventana.getController("EstadoFinal")).setState(false);
-                    //((Toggle) ventana.getController("EstadoInicialFinal")).setState(false);
+                    ((Toggle) ventana.getController("addEstadoInicial")).setState(false);   
+                    ((Toggle) ventana.getController("addEstadoFinal")).setState(false);
+                    ((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
                     ((Toggle) ventana.getController("MoverEstado")).setState(false);
                     ((Toggle) ventana.getController("BorrarEstado")).setState(false);
                     println("Estado Normal");
                     break;
                 case 3:
-                    ((Toggle) ventana.getController("EstadoInicial")).setState(false);   
-                    ((Toggle) ventana.getController("EstadoNormal")).setState(false);
-                    //((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
+                    ((Toggle) ventana.getController("addEstadoInicial")).setState(false);   
+                    ((Toggle) ventana.getController("addEstadoNormal")).setState(false);
+                    ((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
                     ((Toggle) ventana.getController("MoverEstado")).setState(false);
                     ((Toggle) ventana.getController("BorrarEstado")).setState(false);
                     println("Estado Final");
@@ -142,9 +142,9 @@ public class ControladorVentana extends PApplet
     }
     
     //Evento de los botones
-    public void EstadoInicial() {
-         if(((Toggle)ventana.getController("EstadoInicial")).isMousePressed()) {
-        	if(((Toggle)ventana.getController("EstadoInicial")).getState() == true) {
+    public void addEstadoInicial() {
+         if(((Toggle)ventana.getController("addEstadoInicial")).isMousePressed()) {
+        	if(((Toggle)ventana.getController("addEstadoInicial")).getState() == true) {
                     
                     actualizarEstadoDelPrograma(1);
                     
@@ -156,10 +156,10 @@ public class ControladorVentana extends PApplet
     	
     } 
     
-    public void EstadoNormal()
+    public void addEstadoNormal()
     {
-        if(((Toggle)ventana.getController("EstadoNormal")).isMousePressed()) {
-        	if(((Toggle)ventana.getController("EstadoNormal")).getState() == true) {
+        if(((Toggle)ventana.getController("addEstadoNormal")).isMousePressed()) {
+        	if(((Toggle)ventana.getController("addEstadoNormal")).getState() == true) {
                     actualizarEstadoDelPrograma(2);
                 }
         	else {
@@ -168,10 +168,10 @@ public class ControladorVentana extends PApplet
     	}
     }
     
-    public void EstadoFinal()
+    public void addEstadoFinal()
     {
-        if(((Toggle)ventana.getController("EstadoFinal")).isMousePressed()) {
-        	if(((Toggle)ventana.getController("EstadoFinal")).getState() == true) {
+        if(((Toggle)ventana.getController("addEstadoFinal")).isMousePressed()) {
+        	if(((Toggle)ventana.getController("addEstadoFinal")).getState() == true) {
         		actualizarEstadoDelPrograma(3);
         	}   
         	else {

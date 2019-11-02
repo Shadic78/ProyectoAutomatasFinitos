@@ -22,32 +22,38 @@ public class VentanaPrincipal{
     
     public void setButtons(ControlP5 b){
         
-        b.addToggle("Estadoinicial")
+        b.addToggle("addEstadoInicial")
     	.setPosition(parent.width - 250, 80)
     	.setSize(100,40)
     	.setLabel("Estado inicial")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER); 
     	
-    	b.addToggle("EstadoNormal")
+    	b.addToggle("addEstadoNormal")
     	.setPosition(parent.width - 130, 80)
     	.setSize(100,40)
     	.setLabel("Estado normal")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);     
 
-        b.addToggle("EstadoFinal")
+        b.addToggle("addEstadoFinal")
     	.setPosition(parent.width - 250, 130)
     	.setSize(100,40)
     	.setLabel("Estado final")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER); 
         
+        b.addToggle("addEstadoInicialFinal")
+    	.setPosition(parent.width - 130, 130)
+    	.setSize(100,40)
+    	.setLabel("Estado inicial-final")
+    	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER); 
+        
         b.addToggle("BorrarEstado")
-        .setPosition(parent.width - 130, 130)
+        .setPosition(parent.width - 130, 180)
     	.setSize(100,40)
     	.setLabel("Borrar Estado")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
         
          b.addToggle("MoverEstado")
-        .setPosition(parent.width - 190, 180)
+        .setPosition(parent.width - 250, 180)
     	.setSize(100,40)
     	.setLabel("Mover Estado")
     	.getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
