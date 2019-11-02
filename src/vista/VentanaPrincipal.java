@@ -17,14 +17,13 @@ public class VentanaPrincipal extends PApplet
         /**
          * Se crean los botones *
          */
-
     }
 
     public void setButtons(ControlP5 b)
     {
 
-        b.addToggle("estadoinicial")
-                .setPosition(parent.width - 250, 80)
+        b.addToggle("addEstadoInicial")
+                .setPosition(parent.width - 260, 80)
                 .setSize(100, 40)
                 .setLabel("Estado inicial")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
@@ -53,50 +52,26 @@ public class VentanaPrincipal extends PApplet
                 .setLabel("Mover Estados")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("addBorarEstado")
+        b.addToggle("addBorrarEstado")
                 .setPosition(parent.width - 140, 200)
                 .setSize(100, 40)
                 .setLabel("Borrar Estado")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
         //Conexiones
-        b.addToggle("EstadoNormal")
-                .setPosition(parent.width - 130, 80)
-                .setSize(100, 40)
-                .setLabel("Estado normal")
-                .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
-
-        b.addToggle("EstadoFinal")
-                .setPosition(parent.width - 250, 130)
-                .setSize(100, 40)
-                .setLabel("Estado final")
-                .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
-
-        b.addToggle("BorrarEstado")
-                .setPosition(parent.width - 130, 130)
-                .setSize(100, 40)
-                .setLabel("Borrar Estado")
-                .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
-
-        b.addToggle("MoverEstado")
-                .setPosition(parent.width - 190, 180)
-                .setSize(100, 40)
-                .setLabel("Mover Estado")
-                .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
-
         b.addToggle("ConexionNormal")
-                .setPosition(parent.width - 250, 290)
+                .setPosition(parent.width - 260, 290)
                 .setSize(100, 40)
                 .setLabel("Conexión Normal")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("ConexionBucle")
-                .setPosition(parent.width - 130, 290)
+        b.addToggle("conexionBucle")
+                .setPosition(parent.width - 140, 290)
                 .setSize(100, 40)
                 .setLabel("Conexión bucle")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("BorrarConexion")
+        b.addToggle("borrarConexion")
                 .setPosition(parent.width - 190, 350)
                 .setSize(100, 40)
                 .setLabel("Borrar Conexi" + (char) 162 + "n")
@@ -133,8 +108,9 @@ public class VentanaPrincipal extends PApplet
     {
         return parent;
     }
-    
-    public ControlP5 getControlVentanaPrincipal(){
+
+    public ControlP5 getControlVentanaPrincipal()
+    {
         return this.button;
     }
 }
