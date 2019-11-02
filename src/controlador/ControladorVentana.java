@@ -10,7 +10,7 @@ import vista.*;
 
 public class ControladorVentana extends PApplet
 {
-    int estadoDelPrograma = 3;
+    int estadoDelPrograma = 0;
     AutomataFinito automata;
     ControlP5 ventana;
     
@@ -104,7 +104,7 @@ public class ControladorVentana extends PApplet
                     println("Estado Normal");
                     break;
                 case 3:
-                    ((Toggle) ventana.getController("EstadoInicial")).setState(true);   
+                    ((Toggle) ventana.getController("EstadoInicial")).setState(false);   
                     ((Toggle) ventana.getController("EstadoNormal")).setState(false);
                     //((Toggle) ventana.getController("addEstadoInicialFinal")).setState(false);
                     ((Toggle) ventana.getController("MoverEstado")).setState(false);
@@ -141,7 +141,8 @@ public class ControladorVentana extends PApplet
     	}    	
     }
     
-    public void addEstadoInicial() {
+    //Evento de los botones
+    public void EstadoInicial() {
          if(((Toggle)ventana.getController("EstadoInicial")).isMousePressed()) {
         	if(((Toggle)ventana.getController("EstadoInicial")).getState() == true) {
                     
@@ -155,7 +156,7 @@ public class ControladorVentana extends PApplet
     	
     } 
     
-    public void addEstadoNormal()
+    public void EstadoNormal()
     {
         if(((Toggle)ventana.getController("EstadoNormal")).isMousePressed()) {
         	if(((Toggle)ventana.getController("EstadoNormal")).getState() == true) {
@@ -167,7 +168,7 @@ public class ControladorVentana extends PApplet
     	}
     }
     
-    public void addEstadoFinal()
+    public void EstadoFinal()
     {
         if(((Toggle)ventana.getController("EstadoFinal")).isMousePressed()) {
         	if(((Toggle)ventana.getController("EstadoFinal")).getState() == true) {
