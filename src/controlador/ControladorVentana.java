@@ -196,7 +196,7 @@ public class ControladorVentana extends PApplet {
     } 
     
     public void BtnAddConexionNormal() {
-        if (((Toggle) ventana.getController("BtnAddConexionNormal")).isMousePressed() && automata1.listaEstados.size() >= 2) {
+        if (((Toggle) ventana.getController("BtnAddConexionNormal")).isMousePressed() /*&& automata1.listaEstados.size() >= 2*/) {
             if (((Toggle) ventana.getController("BtnAddConexionNormal")).getState() == true) {
                 controladorPrograma.actualizarEstadoDelPrograma(7);
             } else {
