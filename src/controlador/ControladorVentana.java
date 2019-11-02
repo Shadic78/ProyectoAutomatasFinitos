@@ -5,6 +5,7 @@ import controlP5.Toggle;
 import processing.core.PApplet;
 import static processing.core.PApplet.println;
 import modelo.*;
+import processing.core.PFont;
 import vista.*;
 
 public class ControladorVentana extends PApplet
@@ -42,6 +43,16 @@ public class ControladorVentana extends PApplet
     	noStroke();
     	fill(255, 218, 143);
     	rect(width - 300, 0, 300, height);
+        fill(0, 0, 0);
+        
+        //Etiquetas del menu
+        PFont f = createFont("Georgia", 25);
+        textFont(f);
+        text("Menu", width-130, 15 );
+        text("Agregar estados: ", width-130, 60 );
+        text("Agregar Conexiones:", width-130, 260 );
+        text("Ejecutar Automata:", width-130, 460);
+
     	
     	automata.imprimirEstados();
     	
