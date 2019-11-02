@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package vista;
 
 import controlP5.ControlP5;
@@ -12,7 +7,7 @@ import processing.core.PApplet;
  *
  * @author Usuario
  */
-public class VentanaPrincipal extends PApplet{
+public class VentanaPrincipal{
     public ControlP5 button;
     private PApplet parent;
     
@@ -104,6 +99,6 @@ public class VentanaPrincipal extends PApplet{
     public PApplet getParent() {
         return parent;
     }
-    
+
 }
     
