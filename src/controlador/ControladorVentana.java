@@ -62,7 +62,7 @@ public class ControladorVentana extends PApplet {
         if (mouseX < width - 150) {
             // De acuerdo al estado del programa se hace una cosa u otra
             switch (controladorPrograma.getEstadoDelPrograma()) {
-                case 1: // Agregar vertices
+                case 1: // Agregar estado normal
                     Estado estadoNuevo = new Estado(this, mouseX, mouseY, "VerticeNuevo");
                     automata1.agregarEstado(estadoNuevo);
                     break;
