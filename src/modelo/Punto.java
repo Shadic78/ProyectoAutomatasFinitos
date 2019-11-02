@@ -12,12 +12,10 @@ package modelo;
 public class Punto
 {
      private int x, y ;
-    private int radio;
     
-    public Punto(int x, int y, int radio){
+    public Punto(int x, int y){
         this.x = x;
         this.y = y;
-        this.radio = radio;
     }
 
     public int getX() {
@@ -28,20 +26,12 @@ public class Punto
         return y;
     }
 
-    public int getRadio() {
-        return radio;
-    }
-
     public void setX(int x) {
         this.x = x;
     }
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public void setRadio(int radio) {
-        this.radio = radio;
     }
     
 }

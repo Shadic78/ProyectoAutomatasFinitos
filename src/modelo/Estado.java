@@ -2,53 +2,51 @@ package modelo;
 
 import processing.core.PApplet;
 
-public abstract  class Estado
-{
-    private Punto vertice;
-   
+public abstract  class Estado {
+    private Punto coordenadas;   
     private String nombre;
-   
-    PApplet parent;
+    public PApplet parent;
+    public int radio;
 
-    public Estado(PApplet parent, Punto vertice, String nombre)
-    {
+    public Estado(PApplet parent, Punto punto, String nombre) {
         this.parent = parent;
-        this.vertice = vertice;
+        this.coordenadas = punto;
         this.nombre = nombre;
+        this.radio = 20;
     }
 
-    public Punto getVertice()
-    {
-        return vertice;
+    public Punto getCoordenadas() {
+        return coordenadas;
     }
 
-    public void setVertice(Punto vertice)
-    {
-        this.vertice = vertice;
+    public void setCoordenadas(Punto punto) {
+        this.coordenadas = punto;
     }
 
-    public String getNombre()
-    {
+    public String getNombre() {
         return nombre;
     }
 
-    public void setNombre(String nombre)
-    {
+    public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public PApplet getParent()
-    {
+    public PApplet getParent() {
         return parent;
     }
 
-    public void setParent(PApplet parent)
-    {
+    public void setParent(PApplet parent) {
         this.parent = parent;
     }
-    
-    
-	
+
+    public int getRadio() {
+        return radio;
+    }
+
+    public void setRadio(int radio) {
+        this.radio = radio;
+    }
+
     public abstract void show();
 
 }

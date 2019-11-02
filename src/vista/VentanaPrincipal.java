@@ -22,77 +22,70 @@ public class VentanaPrincipal {
     }
 
     public void setButtons(ControlP5 b) {
-        b.addToggle("addEstadoInicial")
-                .setPosition(parent.width - 340, 80)
+        //Estados
+        b.addToggle("BtnAddEstadoInicial")
+                .setPosition(parent.width - 260, 80)
                 .setSize(100, 40)
                 .setLabel("Estado inicial")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("addEstadoNormal")
-                .setPosition(parent.width - 225, 80)
+        b.addToggle("BtnAddEstadoNormal")
+                .setPosition(parent.width - 140, 80)
                 .setSize(100, 40)
-                .setLabel("Estado normal")
+                .setLabel("Estado Normal")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("addEstadoFinal")
-                .setPosition(parent.width - 110, 80)
+        b.addToggle("BtnAddEstadoFinal")
+                .setPosition(parent.width - 260, 140)
                 .setSize(100, 40)
-                .setLabel("Estado final")
+                .setLabel("Estado Final")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("addEstadoInicialFinal")
-                .setPosition(parent.width - 340, 130)
+        b.addToggle("BtnAddEstadoInicialFinal")
+                .setPosition(parent.width - 140, 140)
                 .setSize(100, 40)
                 .setLabel("Estado Inicial-Final")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("borrarEstado")
-                .setPosition(parent.width - 225, 130)
+        b.addToggle("BtnMoverEstado")
+                .setPosition(parent.width - 260, 200)
+                .setSize(100, 40)
+                .setLabel("Mover Estados")
+                .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
+
+        b.addToggle("BtnBorrarEstado")
+                .setPosition(parent.width - 140, 200)
                 .setSize(100, 40)
                 .setLabel("Borrar Estado")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("moverEstado")
-                .setPosition(parent.width - 110, 130)
-                .setSize(100, 40)
-                .setLabel("Mover Estado")
-                .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
-
-        b.addToggle("ConexionNormal")
-                .setPosition(parent.width - 340, 290)
+        b.addToggle("BtnAddConexionNormal")
+                .setPosition(parent.width - 260, 290)
                 .setSize(100, 40)
                 .setLabel("Conexion Normal")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("ConexionBucle")
-                .setPosition(parent.width - 225, 290)
+        b.addToggle("BtnAddConexionBucle")
+                .setPosition(parent.width - 140, 290)
                 .setSize(100, 40)
                 .setLabel("Conexion bucle")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("BorrarConexion")
-                .setPosition(parent.width - 110, 290)
+        b.addToggle("BtnAddBorrarConexion")
+                .setPosition(parent.width - 200, 350)
                 .setSize(100, 40)
-                .setLabel("Borrar Conexion" + (char) 162 + "n")
+                .setLabel("Borrar Conexion")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("PasoEjecucion")
-                .setPosition(parent.width - 340, 520)
+        b.addToggle("BtnAddPasoEjecucion")
+                .setPosition(parent.width - 190, 580)
                 .setSize(100, 40)
-                .setLabel("Ejecutar Paso A Paso")
+                .setLabel("Paso A Paso")
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addTextfield("Ingrese palabra")
-                .setColorLabel(0)
-                .setPosition(parent.width - 340, 450)
-                .setSize(250, 35)
-                .setAutoClear(true);
-
-        b.addBang("Iniciar/Denetenr")
-                .setPosition(parent.width - 80, 450)
-                .setSize(70, 35)
-                .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
-
+        b.addTextfield("Escribe tu palabra").setPosition(parent.width - 220, 500)
+                .setSize(130, 35).setAutoClear(true);
+        b.addBang("Iniciar/Detener").setPosition(parent.width - 80, 500).setSize(40, 35);
     }
 
     public void setParent(PApplet parent) {
