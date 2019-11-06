@@ -11,12 +11,12 @@ public class EstadoInicialFinal extends Estado {
     @Override
     public void show() {
         parent.fill(81, 237, 236);
-        parent.strokeWeight(3);
+        parent.strokeWeight(grosorBorde - 2);
         parent.stroke(70, 206, 205);
         parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), radio * 2, radio * 2);
 
         parent.fill(81, 237, 236);
-        parent.strokeWeight(2);
+        parent.strokeWeight(grosorBorde - 3);
         parent.triangle(super.getCoordenadas().getX() - radio * 2, super.getCoordenadas().getY() - radio,
                 super.getCoordenadas().getX() - radio - 5, super.getCoordenadas().getY(),
                 super.getCoordenadas().getX() - radio * 2, super.getCoordenadas().getY() + radio);

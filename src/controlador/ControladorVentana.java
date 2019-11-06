@@ -1,5 +1,7 @@
 package controlador;
 
+import controlP5.CallbackEvent;
+import controlP5.CallbackListener;
 import controlP5.ControlP5;
 import controlP5.Toggle;
 import processing.core.PApplet;
@@ -12,6 +14,7 @@ public class ControladorVentana extends PApplet {
 
     // El objeto que usaremos para crear la interfaz de usuario
     ControlP5 ventana;
+    CallbackListener cb;        
     AutomataFinito automata1;
     EstadoDelPrograma controladorPrograma;
     PFont fuenteMenu;
@@ -27,10 +30,25 @@ public class ControladorVentana extends PApplet {
         fuenteMenu = createFont("Georgia", 23);
 
         VentanaPrincipal ventana1 = new VentanaPrincipal(this);
-
         ventana = ventana1.getButton();
         automata1 = new AutomataFinito(this);
         controladorPrograma = new EstadoDelPrograma(this, ventana);
+        
+        // Se declara el listener y hace que el mouse cambie al pasar sobre un objeto grafico
+        cb = new CallbackListener() {
+            public void controlEvent(CallbackEvent theEvent) {
+                switch (theEvent.getAction()) {
+                    case (ControlP5.ACTION_ENTER):
+                        cursor(HAND);
+                        break;
+                    case (ControlP5.ACTION_LEAVE):
+                    case (ControlP5.ACTION_RELEASEDOUTSIDE):
+                        cursor(ARROW);
+                        break;
+                }
+            }
+        };
+        ventana.addCallback(cb);       
 
         textAlign(CENTER, CENTER);
         textSize(14);
@@ -94,14 +112,12 @@ public class ControladorVentana extends PApplet {
                     if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick1(automata1.getEstadoClickeado());
                         controladorPrograma.actualizarEstadoDelPrograma(8);
-                        println("estado id: " + controladorPrograma.getEstadoClick1());
                     }
                     break;
 
                 case 8: // Segundo click para agregar una conexion entre estados
                     if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick2(automata1.getEstadoClickeado());
-                        println("estado id2: " + controladorPrograma.getEstadoClick2());
                         automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), "a");
                         controladorPrograma.setEstadoClick1(-1);
                         controladorPrograma.setEstadoClick2(-1);
@@ -135,100 +151,18 @@ public class ControladorVentana extends PApplet {
         }
     }
 
-    /**
-     * ******** EVENTOS DE LOS BOTONES *********
-     */
-    public void BtnAddEstadoInicial() {
-        if (((Toggle) ventana.getController("BtnAddEstadoInicial")).isMousePressed()) {
-            if (((Toggle) ventana.getController("BtnAddEstadoInicial")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(1);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
+    /********* Funcion que controla los eventos de los objetos graficos *********/
+    public void controlEvent(CallbackEvent theEvent) {
+        if (theEvent.getController().isMousePressed()) {
+            // Si se presiono un boton toggle
+            if (theEvent.getController() instanceof Toggle && theEvent.getController().getId() <= 11) {
+                if (((Toggle) theEvent.getController()).getState() == true) {
+                    controladorPrograma.actualizarEstadoDelPrograma(theEvent.getController().getId());
+                } else {
+                    controladorPrograma.actualizarEstadoDelPrograma(0);
+                }
             }
         }
     }
-
-    public void BtnAddEstadoNormal() {
-        if (((Toggle) ventana.getController("BtnAddEstadoNormal")).isMousePressed()) {
-            if (((Toggle) ventana.getController("BtnAddEstadoNormal")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(2);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
-            }
-        }
-    }
-
-    public void BtnAddEstadoFinal() {
-        if (((Toggle) ventana.getController("BtnAddEstadoFinal")).isMousePressed()) {
-            if (((Toggle) ventana.getController("BtnAddEstadoFinal")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(3);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
-            }
-        }
-    }
-
-    public void BtnAddEstadoInicialFinal() {
-        if (((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).isMousePressed()) {
-            if (((Toggle) ventana.getController("BtnAddEstadoInicialFinal")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(4);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
-            }
-        }
-    }
-
-    public void BtnMoverEstado() {
-        if (((Toggle) ventana.getController("BtnMoverEstado")).isMousePressed()) {
-            if (((Toggle) ventana.getController("BtnMoverEstado")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(5);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
-            }
-        }
-    }
-
-    public void BtnBorrarEstado() {
-        if (((Toggle) ventana.getController("BtnBorrarEstado")).isMousePressed()) {
-            if (((Toggle) ventana.getController("BtnBorrarEstado")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(6);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
-            }
-        }
-    }
-
-    public void BtnAddConexionNormal() {
-        if (((Toggle) ventana.getController("BtnAddConexionNormal")).isMousePressed() && automata1.listaEstados.size() >= 2) {
-            if (((Toggle) ventana.getController("BtnAddConexionNormal")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(7);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
-            }
-        }
-    }
-
-    public void BtnAddConexionBucle() {
-        if (((Toggle) ventana.getController("BtnAddConexionBucle")).isMousePressed()) {
-            if (((Toggle) ventana.getController("BtnAddConexionBucle")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(9);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
-            }
-        }
-    }
-
-    public void BtnAddBorrarConexion() {
-        if (((Toggle) ventana.getController("BtnAddBorrarConexion")).isMousePressed()) {
-            if (((Toggle) ventana.getController("BtnAddBorrarConexion")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(10);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
-            }
-        }
-    }
-
-    /**
-     * ****** FIN EVENTOS DE LOS BOTONES *******
-     */
+    
 }

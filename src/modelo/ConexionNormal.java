@@ -17,7 +17,7 @@ public class ConexionNormal extends Conexion{
         super(p, origen, destino);
         this.alturaCurvatura = 40;
         this.condicion = condicion;
-        this.tamFlecha = 5;
+        this.tamFlecha = 6;
         
         // Se inicializan los puntos para posterior actualizarlos
         this.puntoMedio = new Punto(0, 0);
@@ -30,7 +30,7 @@ public class ConexionNormal extends Conexion{
     public void show() {
         actualizarPuntoDeControl();
         parent.noFill();
-        parent.strokeWeight(2);
+        parent.strokeWeight(1);
         parent.stroke(0);
         parent.bezier(super.getOrigen().getCoordenadas().getX(), super.getOrigen().getCoordenadas().getY(), 
                 puntoMedio.getX() + puntoDeControl.getX(), puntoMedio.getY() + puntoDeControl.getY(),
@@ -67,11 +67,11 @@ public class ConexionNormal extends Conexion{
         parent.translate(super.getDestino().getCoordenadas().getX(), super.getDestino().getCoordenadas().getY());
         parent.rotate(anguloFlecha);
 
-        parent.stroke(0);
+        parent.noStroke();
         parent.fill(0);
-        parent.triangle(-tamFlecha - (super.getDestino().getRadio() + tamFlecha), -tamFlecha,
-                -tamFlecha - (super.getDestino().getRadio() + tamFlecha), tamFlecha,
-                -super.getDestino().getRadio() - tamFlecha, 0);
+        parent.triangle(-tamFlecha -super.getDestino().getRadio() -super.getDestino().getGrosorBorde(), -tamFlecha,
+                             -super.getDestino().getRadio() -super.getDestino().getGrosorBorde() + 2, 0,
+                             -tamFlecha - super.getDestino().getRadio() -super.getDestino().getGrosorBorde(), tamFlecha);
         parent.popMatrix();
 
     }
