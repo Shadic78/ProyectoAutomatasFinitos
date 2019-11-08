@@ -73,22 +73,26 @@ public class ControladorVentana extends PApplet {
         automata1.imprimirConexiones();
         automata1.imprimirEstados();
         
-         /*Funcion que dibuja una linea de referencia para insertar una conexion*/
-        if(controladorPrograma.getEstadoDelPrograma() == 8){
-            Punto puntoEstado = automata1.listaEstados.get(automata1.getEstadoClickeado()).getCoordenadas();
-            line(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY);
-        }
 
         fill(0, 0, 0);
         textSize(16);
        
         text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);
+        /*Funcion que dibuja una linea de referencia para insertar una conexion*/
+        if(controladorPrograma.getEstadoDelPrograma() == 8){
+            fill(0, 0, 0);
+            stroke(1);
+            Punto puntoEstado = automata1.getListaEstados().get(controladorPrograma.getEstadoClick1()).getCoordenadas();
+            line(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY);
+            
+            triangle(mouseX, mouseY+6, mouseX, mouseY-6, mouseX+6, mouseY);
+        }
     }
 
     @Override
     public void mouseClicked() {
         // Este if es para que no pongan vertices en el area donde estan los botones
-        if (mouseX < width - 300) {
+        if (mouseX < width - 320) {
             // De acuerdo al estado del programa se hace una cosa u otra
             switch (controladorPrograma.getEstadoDelPrograma()) {
                 case 1: // Agregar estado inicial
@@ -139,14 +143,16 @@ public class ControladorVentana extends PApplet {
     }
 
     public void mouseDragged() {
-        if (controladorPrograma.getEstadoDelPrograma() == 5) {
-            if (!controladorPrograma.getMoviendoEstado()) {
-                controladorPrograma.setEstadoMoviendoID(automata1.getEstadoClickeado());
-            }
-            if (controladorPrograma.getEstadoMoviendoID() >= 0) {
-                controladorPrograma.setMoviendoEstado(true);
-                automata1.getListaEstados().get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setX(mouseX);
-                automata1.getListaEstados().get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setY(mouseY);
+        if (mouseX < width - 320){
+            if (controladorPrograma.getEstadoDelPrograma() == 5) {
+                if (!controladorPrograma.getMoviendoEstado()) {
+                    controladorPrograma.setEstadoMoviendoID(automata1.getEstadoClickeado());
+                }
+                if (controladorPrograma.getEstadoMoviendoID() >= 0) {
+                    controladorPrograma.setMoviendoEstado(true);
+                    automata1.getListaEstados().get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setX(mouseX);
+                    automata1.getListaEstados().get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setY(mouseY);
+                }
             }
         }
     }
@@ -157,24 +163,6 @@ public class ControladorVentana extends PApplet {
             controladorPrograma.setEstadoMoviendoID(-1);
         }
     }
-
-
-    public void BtnBorrarEstado() {
-        if (((Toggle) ventana.getController("BtnBorrarEstado")).isMousePressed()) {
-            if (((Toggle) ventana.getController("BtnBorrarEstado")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(6);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
-            }
-        }
-    } 
-    
-    public void BtnAddConexionNormal() {
-        if (((Toggle) ventana.getController("BtnAddConexionNormal")).isMousePressed() /*&& automata1.listaEstados.size() >= 2*/) {
-            if (((Toggle) ventana.getController("BtnAddConexionNormal")).getState() == true) {
-                controladorPrograma.actualizarEstadoDelPrograma(7);
-            } else {
-                controladorPrograma.actualizarEstadoDelPrograma(0);
 
     /********* Funcion que controla los eventos de los objetos graficos *********/
     public void controlEvent(CallbackEvent theEvent) {

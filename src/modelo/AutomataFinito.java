@@ -6,7 +6,7 @@ import processing.core.PApplet;
 
 public class AutomataFinito {
 
-    public ArrayList<Estado> listaEstados = new ArrayList<Estado>();
+    private ArrayList<Estado> listaEstados = new ArrayList<Estado>();
     private ArrayList<Conexion> listaConexiones = new ArrayList<Conexion>();
     private PApplet parent;
     private String[][] matrizDeCondiciones;
