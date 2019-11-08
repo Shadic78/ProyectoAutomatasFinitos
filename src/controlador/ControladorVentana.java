@@ -72,9 +72,16 @@ public class ControladorVentana extends PApplet {
 
         automata1.imprimirConexiones();
         automata1.imprimirEstados();
+        
+         /*Funcion que dibuja una linea de referencia para insertar una conexion*/
+        if(controladorPrograma.getEstadoDelPrograma() == 8){
+            Punto puntoEstado = automata1.listaEstados.get(automata1.getEstadoClickeado()).getCoordenadas();
+            line(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY);
+        }
 
-        fill(0);
+        fill(0, 0, 0);
         textSize(16);
+       
         text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);
     }
 
@@ -138,8 +145,8 @@ public class ControladorVentana extends PApplet {
             }
             if (controladorPrograma.getEstadoMoviendoID() >= 0) {
                 controladorPrograma.setMoviendoEstado(true);
-                automata1.listaEstados.get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setX(mouseX);
-                automata1.listaEstados.get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setY(mouseY);
+                automata1.getListaEstados().get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setX(mouseX);
+                automata1.getListaEstados().get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setY(mouseY);
             }
         }
     }
@@ -151,7 +158,7 @@ public class ControladorVentana extends PApplet {
         }
     }
 
-<<<<<<< HEAD
+
     public void BtnBorrarEstado() {
         if (((Toggle) ventana.getController("BtnBorrarEstado")).isMousePressed()) {
             if (((Toggle) ventana.getController("BtnBorrarEstado")).getState() == true) {
@@ -168,7 +175,7 @@ public class ControladorVentana extends PApplet {
                 controladorPrograma.actualizarEstadoDelPrograma(7);
             } else {
                 controladorPrograma.actualizarEstadoDelPrograma(0);
-=======
+
     /********* Funcion que controla los eventos de los objetos graficos *********/
     public void controlEvent(CallbackEvent theEvent) {
         if (theEvent.getController().isMousePressed()) {
@@ -179,7 +186,7 @@ public class ControladorVentana extends PApplet {
                 } else {
                     controladorPrograma.actualizarEstadoDelPrograma(0);
                 }
->>>>>>> master
+
             }
         }
     }
