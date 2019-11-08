@@ -7,12 +7,14 @@ public abstract  class Estado {
     private String nombre;
     public PApplet parent;
     public int radio;
+    public int grosorBorde;    
 
     public Estado(PApplet parent, Punto punto, String nombre) {
         this.parent = parent;
         this.coordenadas = punto;
         this.nombre = nombre;
         this.radio = 20;
+        this.grosorBorde = 5;        
     }
 
     public Punto getCoordenadas() {
@@ -45,6 +47,14 @@ public abstract  class Estado {
 
     public void setRadio(int radio) {
         this.radio = radio;
+    }
+
+    public int getGrosorBorde() {
+        return grosorBorde;
+    }
+
+    public void setGrosorBorde(int grosorBorde) {
+        this.grosorBorde = grosorBorde;
     }
 
     public abstract void show();

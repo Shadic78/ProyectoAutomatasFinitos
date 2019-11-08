@@ -20,7 +20,7 @@ public class EstadoFinal extends Estado {
     @Override
     public void show() {
         parent.fill(81, 237, 236);
-        parent.strokeWeight(3);
+        parent.strokeWeight(grosorBorde - 2);
         parent.stroke(70, 206, 205);
        
         parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), radio * 2, radio * 2);
