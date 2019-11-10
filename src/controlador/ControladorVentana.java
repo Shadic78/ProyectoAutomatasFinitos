@@ -59,7 +59,7 @@ public class ControladorVentana extends PApplet {
     public void draw() {
         background(232, 233, 234);
         noStroke();
-        fill(255, 218, 143);
+        fill(255, 141, 141);
         rect(width - 300, 0, 300, height);
 
         //Etiquetas del menu        
@@ -78,14 +78,11 @@ public class ControladorVentana extends PApplet {
         textSize(16);
        
         text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);
+        
         /*Funcion que dibuja una linea de referencia para insertar una conexion*/
         if(controladorPrograma.getEstadoDelPrograma() == 8){
-            fill(0, 0, 0);
-            stroke(1);
             Punto puntoEstado = automata1.getListaEstados().get(controladorPrograma.getEstadoClick1()).getCoordenadas();
-            line(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY);
-            
-            triangle(mouseX, mouseY+6, mouseX, mouseY-6, mouseX+6, mouseY);
+            dibujarFlecha(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY, 0, 5, 0, 0, 0, true);
         }
     }
 
@@ -178,5 +175,47 @@ public class ControladorVentana extends PApplet {
             }
         }
     }
+    
+    // Dibuja una flecha entre dos puntos
+void dibujarFlecha(float x0, float y0, float x1, float y1, float tamTrianguloInicio, float tamTrianguloFinal, int desfaceFlecha, int colorTriangulo, int colorLinea, boolean dibujarLinea) {
+        // Obtener el angulo entre los puntos
+        float angulo = atan2(y1 - y0, x1 - x0);
+
+        // Dibujar la linea entre los dos puntos
+        if (dibujarLinea) {
+            fill(colorLinea);
+            stroke(colorLinea);
+            strokeWeight(1);
+            line(x0, y0, x1, y1);
+        }
+
+        /* Dibujar los triangulos */
+        // triangulo del inicio
+        if (tamTrianguloInicio > 0) {
+            pushMatrix();
+            translate(x0, y0);
+            rotate(angulo + PI);
+            fill(colorTriangulo);
+            stroke(colorTriangulo);
+            triangle(-tamTrianguloInicio - desfaceFlecha, -tamTrianguloInicio,
+                    -tamTrianguloInicio  - desfaceFlecha, tamTrianguloInicio,
+                    -desfaceFlecha, 0);
+            popMatrix();
+        }
+
+        // triangulo del final
+        if (tamTrianguloFinal > 0) {
+            pushMatrix();
+            translate(x1, y1);
+            rotate(angulo);
+            fill(colorTriangulo);
+            stroke(colorTriangulo);
+            triangle(-tamTrianguloFinal  - desfaceFlecha, -tamTrianguloFinal,
+                    -tamTrianguloFinal - desfaceFlecha, tamTrianguloFinal,
+                    -desfaceFlecha, 0);
+            popMatrix();
+        }
+        noFill();
+    }  
     
 }

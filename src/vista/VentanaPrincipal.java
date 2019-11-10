@@ -2,6 +2,7 @@ package vista;
 
 import controlP5.ControlP5;
 import processing.core.PApplet;
+import processing.core.PImage;
 
 /**
  *
@@ -14,7 +15,7 @@ public class VentanaPrincipal {
 
     public VentanaPrincipal(PApplet p) {
         this.parent = p;
-        button = new ControlP5(p);
+        button = new ControlP5(p);          
         setButtons(button);
         /**
          * Se crean los botones *
