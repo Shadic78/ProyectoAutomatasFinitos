@@ -11,9 +11,9 @@ public class EstadoNormal extends Estado {
     @Override
     public void show() {
         parent.fill(81, 237, 236);
-        parent.strokeWeight(grosorBorde);
+        parent.strokeWeight(super.getGrosorBorde());
         parent.stroke(70, 206, 205);
-        parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), radio * 2, radio * 2);
+        parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), super.getRadio() * 2, super.getRadio() * 2);
 
         parent.fill(0);
         parent.textSize(16);        

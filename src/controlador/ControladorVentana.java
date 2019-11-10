@@ -72,16 +72,27 @@ public class ControladorVentana extends PApplet {
 
         automata1.imprimirConexiones();
         automata1.imprimirEstados();
+        
 
-        fill(0);
+        fill(0, 0, 0);
         textSize(16);
+       
         text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);
+        /*Funcion que dibuja una linea de referencia para insertar una conexion*/
+        if(controladorPrograma.getEstadoDelPrograma() == 8){
+            fill(0, 0, 0);
+            stroke(1);
+            Punto puntoEstado = automata1.getListaEstados().get(controladorPrograma.getEstadoClick1()).getCoordenadas();
+            line(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY);
+            
+            triangle(mouseX, mouseY+6, mouseX, mouseY-6, mouseX+6, mouseY);
+        }
     }
 
     @Override
     public void mouseClicked() {
         // Este if es para que no pongan vertices en el area donde estan los botones
-        if (mouseX < width - 300) {
+        if (mouseX < width - 320) {
             // De acuerdo al estado del programa se hace una cosa u otra
             switch (controladorPrograma.getEstadoDelPrograma()) {
                 case 1: // Agregar estado inicial
@@ -132,14 +143,16 @@ public class ControladorVentana extends PApplet {
     }
 
     public void mouseDragged() {
-        if (controladorPrograma.getEstadoDelPrograma() == 5) {
-            if (!controladorPrograma.getMoviendoEstado()) {
-                controladorPrograma.setEstadoMoviendoID(automata1.getEstadoClickeado());
-            }
-            if (controladorPrograma.getEstadoMoviendoID() >= 0) {
-                controladorPrograma.setMoviendoEstado(true);
-                automata1.listaEstados.get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setX(mouseX);
-                automata1.listaEstados.get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setY(mouseY);
+        if (mouseX < width - 320){
+            if (controladorPrograma.getEstadoDelPrograma() == 5) {
+                if (!controladorPrograma.getMoviendoEstado()) {
+                    controladorPrograma.setEstadoMoviendoID(automata1.getEstadoClickeado());
+                }
+                if (controladorPrograma.getEstadoMoviendoID() >= 0) {
+                    controladorPrograma.setMoviendoEstado(true);
+                    automata1.getListaEstados().get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setX(mouseX);
+                    automata1.getListaEstados().get(controladorPrograma.getEstadoMoviendoID()).getCoordenadas().setY(mouseY);
+                }
             }
         }
     }
@@ -161,6 +174,7 @@ public class ControladorVentana extends PApplet {
                 } else {
                     controladorPrograma.actualizarEstadoDelPrograma(0);
                 }
+
             }
         }
     }

@@ -6,8 +6,8 @@ public abstract  class Estado {
     private Punto coordenadas;   
     private String nombre;
     public PApplet parent;
-    public int radio;
-    public int grosorBorde;    
+    private int radio;
+    private int grosorBorde;    
 
     public Estado(PApplet parent, Punto punto, String nombre) {
         this.parent = parent;

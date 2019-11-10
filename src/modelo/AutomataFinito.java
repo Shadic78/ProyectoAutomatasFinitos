@@ -6,8 +6,8 @@ import processing.core.PApplet;
 
 public class AutomataFinito {
 
-    public ArrayList<Estado> listaEstados = new ArrayList<Estado>();
-    public ArrayList<Conexion> listaConexiones = new ArrayList<Conexion>();
+    private ArrayList<Estado> listaEstados = new ArrayList<Estado>();
+    private ArrayList<Conexion> listaConexiones = new ArrayList<Conexion>();
     private PApplet parent;
     private String[][] matrizDeCondiciones;
 
@@ -35,9 +35,9 @@ public class AutomataFinito {
 
     public int getEstadoClickeado() {
         int estadoClickeado = -1;
-        for (int i = 0; i < listaEstados.size(); i++) {
-            if (distanciaEntrePuntos(listaEstados.get(i).getCoordenadas().getX(), listaEstados.get(i).getCoordenadas().getY(),
-                    parent.mouseX, parent.mouseY) <= this.listaEstados.get(i).getRadio()) {
+        for (int i = 0; i < getListaEstados().size(); i++) {
+            if (distanciaEntrePuntos(getListaEstados().get(i).getCoordenadas().getX(), getListaEstados().get(i).getCoordenadas().getY(),
+                    parent.mouseX, parent.mouseY) <= getListaEstados().get(i).getRadio()) {
                 estadoClickeado = i;
                 break;
             }
@@ -75,5 +75,30 @@ public class AutomataFinito {
             }
         }
     }
+
+    public ArrayList<Estado> getListaEstados() {
+        return listaEstados;
+    }
+
+    public ArrayList<Conexion> getListaConexiones() {
+        return listaConexiones;
+    }
+
+    public String[][] getMatrizDeCondiciones() {
+        return matrizDeCondiciones;
+    }
+
+    public void setListaEstados(ArrayList<Estado> listaEstados) {
+        this.listaEstados = listaEstados;
+    }
+
+    public void setListaConexiones(ArrayList<Conexion> listaConexiones) {
+        this.listaConexiones = listaConexiones;
+    }
+
+    public void setMatrizDeCondiciones(String[][] matrizDeCondiciones) {
+        this.matrizDeCondiciones = matrizDeCondiciones;
+    }
+    
 
 }
