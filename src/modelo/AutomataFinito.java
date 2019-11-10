@@ -57,8 +57,9 @@ public class AutomataFinito {
             matrizDeCondiciones[estado1][estado2] = condicion;
             // Conexion normal
             if(estado1 != estado2) {
-                PApplet.println("Estado1: " + estado1 + " | Estado2: " + estado2);
-                listaConexiones.add(new ConexionNormal(parent, listaEstados.get(estado1), listaEstados.get(estado2), condicion));                
+                PApplet.println("Conexion: Estado1: " + estado1 + " | Estado2: " + estado2 + " | " + "Condicion: " + matrizDeCondiciones[estado1][estado2]);
+                Condicion condicionNueva = new Condicion(parent, new Punto(0, 0), condicion);
+                listaConexiones.add(new ConexionNormal(parent, listaEstados.get(estado1), listaEstados.get(estado2), condicionNueva));                
             }
             // Conexion bucle
             else {

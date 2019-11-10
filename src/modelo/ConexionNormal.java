@@ -8,15 +8,13 @@ public class ConexionNormal extends Conexion{
     private Punto puntoDeControl;
     private float angulo;
     private int alturaCurvatura;
-    private String condicion;
     // Variables de la punta de flecha
     private float anguloFlecha;
     private int tamFlecha;
 
-    public ConexionNormal (PApplet p, Estado origen, Estado destino, String condicion) {
-        super(p, origen, destino);
+    public ConexionNormal (PApplet p, Estado origen, Estado destino, Condicion condicion) {
+        super(p, origen, destino, condicion);
         this.alturaCurvatura = 40;
-        this.condicion = condicion;
         this.tamFlecha = 6;
         
         // Se inicializan los puntos para posterior actualizarlos
@@ -24,11 +22,13 @@ public class ConexionNormal extends Conexion{
         this.puntoDeControl = new Punto(0, 0);
 
         actualizarPuntoDeControl();
+        actualizarCoordenadasCondicion();
     }
 
     @Override    
     public void show() {
         actualizarPuntoDeControl();
+        actualizarCoordenadasCondicion();
         parent.noFill();
         parent.strokeWeight(1);
         parent.stroke(0);
@@ -37,7 +37,7 @@ public class ConexionNormal extends Conexion{
                 puntoMedio.getX() + puntoDeControl.getX(), puntoMedio.getY() + puntoDeControl.getY(), 
                 super.getDestino().getCoordenadas().getX(), super.getDestino().getCoordenadas().getY());
         dibujarPuntaDeFlecha();
-
+        super.getCondicion().show();
     }
 
     public void actualizarPuntoDeControl() {
@@ -74,6 +74,11 @@ public class ConexionNormal extends Conexion{
                              -tamFlecha - super.getDestino().getRadio() -super.getDestino().getGrosorBorde(), tamFlecha);
         parent.popMatrix();
 
+    }
+    
+    public void actualizarCoordenadasCondicion() {
+        super.getCondicion().getCoordenadas().setX(puntoMedio.getX() + puntoDeControl.getX());
+        super.getCondicion().getCoordenadas().setY(puntoMedio.getY() + puntoDeControl.getY());        
     }
 
 }

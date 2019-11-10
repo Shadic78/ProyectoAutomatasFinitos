@@ -14,12 +14,14 @@ import processing.core.PApplet;
 public abstract class Conexion {
     private Estado origen;
     private Estado destino;
+    private Condicion condicion;
     public PApplet parent;
 
-    public Conexion(PApplet p, Estado origen, Estado destino) {
+    public Conexion(PApplet p, Estado origen, Estado destino, Condicion condicion) {
         this.parent = p;
         this.origen = origen;
         this.destino = destino;
+        this.condicion = condicion;
     }
 
     public Estado getOrigen() {
@@ -44,6 +46,14 @@ public abstract class Conexion {
 
     public void setParent(PApplet parent) {
         this.parent = parent;
+    }
+
+    public Condicion getCondicion() {
+        return condicion;
+    }
+
+    public void setCondicion(Condicion condicion) {
+        this.condicion = condicion;
     }
     
     public abstract void show();

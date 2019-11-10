@@ -4,6 +4,7 @@ import controlP5.CallbackEvent;
 import controlP5.CallbackListener;
 import controlP5.ControlP5;
 import controlP5.Toggle;
+import javax.swing.JOptionPane;
 import processing.core.PApplet;
 import static processing.core.PApplet.println;
 import modelo.*;
@@ -18,6 +19,7 @@ public class ControladorVentana extends PApplet {
     AutomataFinito automata1;
     EstadoDelPrograma controladorPrograma;
     PFont fuenteMenu;
+    int colorFlecha;
 
     @Override
     public void settings() {
@@ -83,7 +85,13 @@ public class ControladorVentana extends PApplet {
         /*Funcion que dibuja una linea de referencia para insertar una conexion*/
         if(controladorPrograma.getEstadoDelPrograma() == 8){
             Punto puntoEstado = automata1.getListaEstados().get(controladorPrograma.getEstadoClick1()).getCoordenadas();
-            dibujarFlecha(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY, 0, 5, 0, 0, 0, true);
+            if(controladorPrograma.isBorrandoConexion()) {
+                colorFlecha = color(255, 141, 141);
+            }
+            else {
+                colorFlecha = color(0, 0, 0);
+            }
+            dibujarFlecha(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY, 0, 5, 0, colorFlecha, colorFlecha, true);
         }
     }
 
@@ -133,7 +141,8 @@ public class ControladorVentana extends PApplet {
                         }
                         // Si se esta agregando una conexion
                         else {
-                            automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), "a");                            
+                            String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
+                            automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);                            
                         }
                         controladorPrograma.setEstadoClick1(-1);
                         controladorPrograma.setEstadoClick2(-1);
