@@ -135,12 +135,16 @@ public class ControladorVentana extends PApplet {
                 case 8: // Segundo click para agregar una conexion entre estados
                     if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick2(automata1.getEstadoClickeado());                        
-                        // Si se esta borrando una conexion
+                        /*****************************************************
+                         *                  BORRAR CONEXION
+                         ****************************************************/
                         if(controladorPrograma.isBorrandoConexion()) {
                             println("Borrando conexion");
                         }
-                        // Si se esta agregando una conexion
-                        else {
+                        /*****************************************************
+                         *                AGREGAR CONEXION
+                         ****************************************************/                              
+                        else {                      
                             String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
                             automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);                            
                         }
