@@ -78,6 +78,7 @@ public class ControladorVentana extends PApplet {
         textSize(16);
        
         text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);
+        text("Borrando conexion: " + controladorPrograma.isBorrandoConexion(), width / 2, height - 60);
         
         /*Funcion que dibuja una linea de referencia para insertar una conexion*/
         if(controladorPrograma.getEstadoDelPrograma() == 8){
@@ -125,8 +126,15 @@ public class ControladorVentana extends PApplet {
 
                 case 8: // Segundo click para agregar una conexion entre estados
                     if (automata1.getEstadoClickeado() >= 0) {
-                        controladorPrograma.setEstadoClick2(automata1.getEstadoClickeado());
-                        automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), "a");
+                        controladorPrograma.setEstadoClick2(automata1.getEstadoClickeado());                        
+                        // Si se esta borrando una conexion
+                        if(controladorPrograma.isBorrandoConexion()) {
+                            println("Borrando conexion");
+                        }
+                        // Si se esta agregando una conexion
+                        else {
+                            automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), "a");                            
+                        }
                         controladorPrograma.setEstadoClick1(-1);
                         controladorPrograma.setEstadoClick2(-1);
                         controladorPrograma.actualizarEstadoDelPrograma(7);
@@ -166,10 +174,28 @@ public class ControladorVentana extends PApplet {
         if (theEvent.getController().isMousePressed()) {
             // Si se presiono un boton toggle
             if (theEvent.getController() instanceof Toggle && theEvent.getController().getId() <= 11) {
+                
+                if(theEvent.getController().getId() != 10) {
+                    controladorPrograma.setBorrandoConexion(false);                   
+                }
+                               
                 if (((Toggle) theEvent.getController()).getState() == true) {
-                    controladorPrograma.actualizarEstadoDelPrograma(theEvent.getController().getId());
-                } else {
+                    // Si se presiono borrarConexion entonces se pasa al estado de dar el primer click pero se activa la variable borrandoConexion
+                    if(theEvent.getController().getId() == 10) {
+                        controladorPrograma.setBorrandoConexion(true);                        
+                        controladorPrograma.actualizarEstadoDelPrograma(7);
+                    }
+                    else {
+                        controladorPrograma.actualizarEstadoDelPrograma(theEvent.getController().getId());                        
+                    }
+                    
+                } 
+                else {                    
                     controladorPrograma.actualizarEstadoDelPrograma(0);
+                    // Si se desactivo el boton de borrar conexion
+                    if(theEvent.getController().getId() == 10) {
+                        controladorPrograma.setBorrandoConexion(false);
+                    }
                 }
 
             }

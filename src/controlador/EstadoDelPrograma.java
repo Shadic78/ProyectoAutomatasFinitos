@@ -17,8 +17,8 @@ public class EstadoDelPrograma {
      * 7 - Agregar conexion normal (Al dar click a un estado el estado del programa cambia a 8)
      * 8 - (Dar click en el segundo estado para agregar una conexion)
      * 9 - Agregar conexion bucle    
-     * 10 - Borrar conexion (Primer click)
-     * 11 - Borrar conexion (segundo click)
+     * 10 - 
+     * 11 - 
      */
     private int estadoDelPrograma = 0;
 	
@@ -30,13 +30,15 @@ public class EstadoDelPrograma {
     // Variables para saber si se esta moviendo un estado y cual es
     private boolean moviendoEstado;
     private int estadoMoviendoID;
+    private boolean borrandoConexion;
 
     public EstadoDelPrograma(PApplet p, ControlP5 ventana) {
         this.parent = p;
         this.ventana = ventana;
         // Para evitar problemas al mover estados por primera vez
         this.moviendoEstado = false;
-        this.estadoMoviendoID = -1;		
+        this.estadoMoviendoID = -1;
+        this.borrandoConexion = false;
     }
 		
     public int getEstadoClick1() {
@@ -81,7 +83,8 @@ public class EstadoDelPrograma {
 
     // De acuerdo al estado del programa desactiva los otros botones
     public void actualizarEstadoDelPrograma(int estado) {
-        estadoDelPrograma = estado;
+        estadoDelPrograma = estado;            
+        
         // Obtiene una lista de los botones que hay en ventana
         List listaBotones = ventana.getAll(Toggle.class);    
         /* 
@@ -92,12 +95,32 @@ public class EstadoDelPrograma {
         */
         if(estadoDelPrograma != 0 && estadoDelPrograma != 8) {
             for(int i = 0; i < listaBotones.size() ; i++) {
-                if( ((Toggle)listaBotones.get(i)).getId() != estadoDelPrograma ) {
-                    ((Toggle)listaBotones.get(i)).setState(false);
+                if( ((Toggle)listaBotones.get(i)).getId() != estadoDelPrograma) {
+                    // Si el estado es 10 y no se esta borrando una conexion entonces se desactiva el btn de borrar conexion
+                    if( ((Toggle)listaBotones.get(i)).getId() == 10 ) {
+                        if(!borrandoConexion) {
+                            ((Toggle)listaBotones.get(i)).setState(false);                                                    
+                        }
+                    }
+                    else {
+                        ((Toggle)listaBotones.get(i)).setState(false);                                              
+                    }
+                }
+                // Si el estado es 7 y se esta borrando una conexion se desactiva el btn de agregar conexion
+                else if(((Toggle)listaBotones.get(i)).getId() == 7 && borrandoConexion) {
+                    ((Toggle)listaBotones.get(i)).setState(false);                                           
                 }
             }            
         }
 
     }
-    
+
+    public boolean isBorrandoConexion() {
+        return borrandoConexion;
+    }
+
+    public void setBorrandoConexion(boolean borrandoConexion) {
+        this.borrandoConexion = borrandoConexion;
+    }
+        
 }
