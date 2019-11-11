@@ -124,13 +124,7 @@ public class VentanaPrincipal {
                 .setImages(parent.loadImage("BorrarConexion1.png"), parent.loadImage("BorrarConexion2.png"), parent.loadImage("BorrarConexion2.png"))                                                                                                               
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addToggle("BtnAddPasoEjecucion")
-                .setPosition(parent.width - 190, 580)
-                .setSize(widthBtn, heightBtn)
-                .setLabel("Paso siguiente")
-                .setId(12)
-                .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
-
+        /**** Objetos para ejecutar el automata ****/
         b.addTextfield("Escribe tu palabra")
                 .setPosition(parent.width - 200, 440)
                 .setSize(110, 40)
@@ -146,7 +140,14 @@ public class VentanaPrincipal {
                 .setSize(40, 40)
                 .setColorCaptionLabel(parent.color(159, 162, 166))
                 .setColorBackground(parent.color(60, 150, 215));
-;
+        
+        b.addToggle("BtnAddPasoSiguiente")
+                .setPosition(parent.width - 200, 490)
+                .setSize(widthBtn, heightBtn)
+                .setLabel("Paso siguiente")
+                .setId(12)
+                .setImages(parent.loadImage("PasoSiguiente1.png"), parent.loadImage("PasoSiguiente2.png"), parent.loadImage("PasoSiguiente2.png"))                                                                                                                               
+                .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
     }
 
     public void setParent(PApplet parent) {

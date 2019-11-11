@@ -180,7 +180,7 @@ public class ControladorVentana extends PApplet {
     public void controlEvent(CallbackEvent theEvent) {
         if (theEvent.getController().isMousePressed()) {
             // Si se presiono un boton toggle
-            if (theEvent.getController() instanceof Toggle && theEvent.getController().getId() <= 11) {
+            if (theEvent.getController() instanceof Toggle) {
                 
                 if(theEvent.getController().getId() != 10) {
                     controladorPrograma.setBorrandoConexion(false);                   
