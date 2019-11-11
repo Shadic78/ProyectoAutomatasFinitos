@@ -22,12 +22,12 @@ public abstract  class Estado {
         this.radio = 22;
         // Colores
         this.grosorBorde = 4;      
-        this.fuenteTexto = parent.createFont("Fuentes/OpenSans-SemiBold.ttf", 14); 
+        this.fuenteTexto = parent.createFont("Fuentes/OpenSans-SemiBold.ttf", 16); 
         this.colorTexto = parent.color(0,0,0);
         //this.colorBackground = parent.color(243, 178, 176);
         //this.colorBordes = parent.color(254, 121, 122);
-        this.colorBackground = parent.color(117, 230, 89);//79, 223, 115
-        this.colorBordes = parent.color(9, 184, 62);        
+        this.colorBackground = parent.color(81, 237, 236);
+        this.colorBordes = parent.color(70, 206, 205);    
     }
 
     public Punto getCoordenadas() {
