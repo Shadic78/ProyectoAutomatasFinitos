@@ -151,6 +151,15 @@ public class ControladorVentana extends PApplet {
                         controladorPrograma.actualizarEstadoDelPrograma(7);
                     }
                     break;
+                    
+                case 9: // Agregar conexion bucle
+                    if(automata1.getEstadoClickeado() >= 0) {
+                        controladorPrograma.setEstadoClick1(automata1.getEstadoClickeado());
+                        String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
+                        automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick1(), condicion);    
+                        controladorPrograma.setEstadoClick1(-1);                        
+                    }
+                    break;
 
                 default:
                     println("mouseclicked estado default");

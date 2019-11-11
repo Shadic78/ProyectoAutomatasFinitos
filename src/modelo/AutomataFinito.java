@@ -63,7 +63,9 @@ public class AutomataFinito {
             }
             // Conexion bucle
             else {
-                parent.println("AutomataFinito agregar conexion bucle");
+                PApplet.println("Conexion bucle: Estado1: " + estado1 + " | Estado2: " + estado2 + " | " + "Condicion: " + matrizDeCondiciones[estado1][estado2]);
+                Condicion condicionNueva = new Condicion(parent, new Punto(0, 0), condicion);
+                listaConexiones.add(new ConexionBucle(parent, listaEstados.get(estado1), listaEstados.get(estado2), condicionNueva));
             }
             
         }

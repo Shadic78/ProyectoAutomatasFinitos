@@ -31,7 +31,7 @@ public class ConexionNormal extends Conexion{
         actualizarCoordenadasCondicion();
         parent.noFill();
         parent.strokeWeight(2);
-        parent.stroke(parent.color(155, 92, 181));
+        parent.stroke(super.getColorRelleno());
         parent.bezier(super.getOrigen().getCoordenadas().getX(), super.getOrigen().getCoordenadas().getY(), 
                 puntoMedio.getX() + puntoDeControl.getX(), puntoMedio.getY() + puntoDeControl.getY(),
                 puntoMedio.getX() + puntoDeControl.getX(), puntoMedio.getY() + puntoDeControl.getY(), 
@@ -69,7 +69,7 @@ public class ConexionNormal extends Conexion{
 
         parent.noStroke();
         parent.strokeWeight(1);
-        parent.fill(parent.color(155, 92, 181));
+        parent.fill(super.getColorRelleno());
         parent.triangle(-tamFlecha -super.getDestino().getRadio() -super.getDestino().getGrosorBorde(), -tamFlecha,
                              -super.getDestino().getRadio() -super.getDestino().getGrosorBorde() + 2, 0,
                              -tamFlecha - super.getDestino().getRadio() -super.getDestino().getGrosorBorde(), tamFlecha);
