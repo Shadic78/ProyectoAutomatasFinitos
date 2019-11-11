@@ -19,15 +19,19 @@ public class EstadoFinal extends Estado {
 
     @Override
     public void show() {
-        parent.fill(81, 237, 236);
-        parent.strokeWeight(super.getGrosorBorde() - 2);
-        parent.stroke(70, 206, 205);
+        //parent.fill(81, 237, 236);
+        parent.fill(super.getColorBackground());
+        parent.strokeWeight(super.getGrosorBorde());
+        //parent.stroke(70, 206, 205);
+        parent.stroke(super.getColorBordes());
        
         parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), super.getRadio() * 2, super.getRadio() * 2);
         parent.ellipse(super.getCoordenadas().getX(), super.getCoordenadas().getY(), (super.getRadio() * 2) - 10, (super.getRadio() * 2) - 10);
         
-        parent.fill(0);
-        parent.textSize(16);        
+        //parent.fill(0);
+        parent.fill(super.getColorTexto());
+        parent.textSize(16);
+        parent.textFont(super.getFuenteTexto());
         parent.text(super.getNombre(), super.getCoordenadas().getX(), super.getCoordenadas().getY());
     }
     

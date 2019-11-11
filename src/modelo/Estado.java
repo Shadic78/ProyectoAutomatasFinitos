@@ -1,20 +1,33 @@
 package modelo;
 
 import processing.core.PApplet;
+import processing.core.PFont;
 
 public abstract  class Estado {
     private Punto coordenadas;   
     private String nombre;
     public PApplet parent;
     private int radio;
-    private int grosorBorde;    
+    // Variables para la estetica de los estados    
+    private int grosorBorde;   
+    private PFont fuenteTexto;
+    private int colorTexto;
+    private int colorBackground;
+    private int colorBordes;
 
     public Estado(PApplet parent, Punto punto, String nombre) {
         this.parent = parent;
         this.coordenadas = punto;
         this.nombre = nombre;
-        this.radio = 20;
-        this.grosorBorde = 5;        
+        this.radio = 22;
+        // Colores
+        this.grosorBorde = 4;      
+        this.fuenteTexto = parent.createFont("Fuentes/OpenSans-SemiBold.ttf", 14); 
+        this.colorTexto = parent.color(0,0,0);
+        //this.colorBackground = parent.color(243, 178, 176);
+        //this.colorBordes = parent.color(254, 121, 122);
+        this.colorBackground = parent.color(117, 230, 89);//79, 223, 115
+        this.colorBordes = parent.color(9, 184, 62);        
     }
 
     public Punto getCoordenadas() {
@@ -57,6 +70,39 @@ public abstract  class Estado {
         this.grosorBorde = grosorBorde;
     }
 
+    public PFont getFuenteTexto() {
+        return fuenteTexto;
+    }
+
+    public void setFuenteTexto(PFont fuenteTexto) {
+        this.fuenteTexto = fuenteTexto;
+    }
+
+    public int getColorTexto() {
+        return colorTexto;
+    }
+
+    public void setColorTexto(int colorTexto) {
+        this.colorTexto = colorTexto;
+    }
+
+    public int getColorBackground() {
+        return colorBackground;
+    }
+
+    public void setColorBackground(int colorBackground) {
+        this.colorBackground = colorBackground;
+    }
+
+    public int getColorBordes() {
+        return colorBordes;
+    }
+
+    public void setColorBordes(int colorBordes) {
+        this.colorBordes = colorBordes;
+    }  
+    
+    // Metodo abstracto a sobreescribir en las subclases
     public abstract void show();
 
 }

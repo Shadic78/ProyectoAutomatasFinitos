@@ -44,7 +44,7 @@ public class Condicion {
     public void show() {
         //parent.fill(0);
         //parent.ellipse(getCoordenadas().getX(), getCoordenadas().getY(), radio, radio);
-        parent.fill(0);
+        parent.fill(parent.color(159, 162, 166));
         parent.textSize(16);        
         parent.text(cadena, getCoordenadas().getX(), getCoordenadas().getY());
     }

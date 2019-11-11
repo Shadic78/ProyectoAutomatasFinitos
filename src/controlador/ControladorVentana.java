@@ -60,12 +60,16 @@ public class ControladorVentana extends PApplet {
     @Override
     public void draw() {
         // Decoracion del menu
-        background(232, 233, 234);
+        //background(232, 233, 234);
+        background(243, 243, 243);
         noStroke();
         fill(255);
         rect(width - 290, 0, 290, height);        
-        fill(60, 150, 215);        
+        fill(60, 150, 215); 
+        // Titulo del menu
         rect(width - 290, 0, 290, 40);
+        // Barra separadora del menu
+        rect(width - 295, 0, 5, height);
 
         automata1.imprimirConexiones();
         automata1.imprimirEstados();
@@ -83,7 +87,7 @@ public class ControladorVentana extends PApplet {
                 colorFlecha = color(255, 141, 141);
             }
             else {
-                colorFlecha = color(0, 0, 0);
+                colorFlecha = color(155, 92, 181);
             }
             dibujarFlecha(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY, 0, 5, 0, colorFlecha, colorFlecha, true);
         }
@@ -218,7 +222,7 @@ void dibujarFlecha(float x0, float y0, float x1, float y1, float tamTrianguloIni
         if (dibujarLinea) {
             fill(colorLinea);
             stroke(colorLinea);
-            strokeWeight(1);
+            strokeWeight(2);
             line(x0, y0, x1, y1);
         }
 
