@@ -29,8 +29,8 @@ public class ControladorVentana extends PApplet {
 
     @Override
     public void setup() {
-        fuenteMenu = createFont("Georgia", 23);
-
+        fuenteMenu = createFont("Fuentes/OpenSans-SemiBold.ttf", 14);
+        
         VentanaPrincipal ventana1 = new VentanaPrincipal(this);
         ventana = ventana1.getButton();
         automata1 = new AutomataFinito(this);
@@ -61,16 +61,18 @@ public class ControladorVentana extends PApplet {
     public void draw() {
         background(232, 233, 234);
         noStroke();
-        fill(255, 141, 141);
-        rect(width - 300, 0, 300, height);
+        fill(255);
+        rect(width - 290, 0, 290, height);        
+        fill(60, 150, 215);        
+        rect(width - 290, 0, 290, 40);
 
         //Etiquetas del menu        
-        fill(0, 0, 0);
-        textFont(fuenteMenu);
-        text("Menu", width - 130, 15);
-        text("Agregar estados: ", width - 130, 60);
-        text("Agregar Conexiones:", width - 130, 260);
-        text("Ejecutar Automata:", width - 130, 460);
+        //fill(0, 0, 0);
+        //textFont(fuenteMenu);
+        //text("Menu", width - 130, 15);
+        //text("Agregar estados: ", width - 130, 60);
+        //text("Agregar Conexiones:", width - 130, 260);
+        //text("Ejecutar Automata:", width - 130, 460);
 
         automata1.imprimirConexiones();
         automata1.imprimirEstados();
@@ -98,7 +100,7 @@ public class ControladorVentana extends PApplet {
     @Override
     public void mouseClicked() {
         // Este if es para que no pongan vertices en el area donde estan los botones
-        if (mouseX < width - 320) {
+        if (mouseX < width - 310) {
             // De acuerdo al estado del programa se hace una cosa u otra
             switch (controladorPrograma.getEstadoDelPrograma()) {
                 case 1: // Agregar estado inicial
@@ -161,7 +163,7 @@ public class ControladorVentana extends PApplet {
     }
 
     public void mouseDragged() {
-        if (mouseX < width - 320){
+        if (mouseX < width - 310){
             if (controladorPrograma.getEstadoDelPrograma() == 5) {
                 if (!controladorPrograma.getMoviendoEstado()) {
                     controladorPrograma.setEstadoMoviendoID(automata1.getEstadoClickeado());
