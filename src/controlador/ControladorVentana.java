@@ -59,6 +59,7 @@ public class ControladorVentana extends PApplet {
 
     @Override
     public void draw() {
+        // Decoracion del menu
         background(232, 233, 234);
         noStroke();
         fill(255);
@@ -66,21 +67,12 @@ public class ControladorVentana extends PApplet {
         fill(60, 150, 215);        
         rect(width - 290, 0, 290, 40);
 
-        //Etiquetas del menu        
-        //fill(0, 0, 0);
-        //textFont(fuenteMenu);
-        //text("Menu", width - 130, 15);
-        //text("Agregar estados: ", width - 130, 60);
-        //text("Agregar Conexiones:", width - 130, 260);
-        //text("Ejecutar Automata:", width - 130, 460);
-
         automata1.imprimirConexiones();
         automata1.imprimirEstados();
         
 
         fill(0, 0, 0);
-        textSize(16);
-       
+        textSize(16);      
         text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);
         text("Borrando conexion: " + controladorPrograma.isBorrandoConexion(), width / 2, height - 60);
         

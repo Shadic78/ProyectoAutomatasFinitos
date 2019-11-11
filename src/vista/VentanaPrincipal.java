@@ -20,8 +20,6 @@ public class VentanaPrincipal {
     public VentanaPrincipal(PApplet p) {
         this.parent = p;
         button = new ControlP5(p);       
-        button.setColorBackground(parent.color(60, 150, 215));
-        button.setColorActive(parent.color(29, 94, 141));
         // Tamanio de los botones
         this.widthBtn = 110;
         this.heightBtn = 40;
@@ -31,7 +29,7 @@ public class VentanaPrincipal {
     }
 
     public void setButtons(ControlP5 b, int widthBtn, int heightBtn) {
-        
+        // Etiquetas
         b.addLabel("Menu")
                 .setColor(parent.color(255, 255, 255))
                 .setPosition(parent.width - (290 / 2) - 25, 10)
@@ -49,11 +47,11 @@ public class VentanaPrincipal {
         
         b.addLabel("Ejecutar automata")
                 .setColor(parent.color(159, 162, 166))
-                .setPosition(parent.width - (290 / 2) - 63, 410)
+                .setPosition(parent.width - (290 / 2) - 67, 410)
                 .setFont(fuenteMenu);
         
         
-        //Estados
+        // Botones
         b.addToggle("BtnAddEstadoInicial")
                 .setPosition(parent.width - 260, 80)
                 .setSize(widthBtn, heightBtn)
@@ -129,13 +127,26 @@ public class VentanaPrincipal {
         b.addToggle("BtnAddPasoEjecucion")
                 .setPosition(parent.width - 190, 580)
                 .setSize(widthBtn, heightBtn)
-                .setLabel("Paso A Paso")
+                .setLabel("Paso siguiente")
                 .setId(12)
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        b.addTextfield("Escribe tu palabra").setPosition(parent.width - 220, 500)
-                .setSize(130, 35).setAutoClear(true);
-        b.addBang("Iniciar/Detener").setPosition(parent.width - 80, 500).setSize(40, 35);
+        b.addTextfield("Escribe tu palabra")
+                .setPosition(parent.width - 200, 440)
+                .setSize(110, 40)
+                .setColorBackground(parent.color(255, 255, 255))
+                .setColor(parent.color(159, 162, 166))
+                .setFont(fuenteMenu)
+                .setColorCursor(parent.color(159, 162, 166))
+                .setLabelVisible(false)
+                .setAutoClear(false);
+        
+        b.addBang("Iniciar/Detener")
+                .setPosition(parent.width - 80, 440)
+                .setSize(40, 40)
+                .setColorCaptionLabel(parent.color(159, 162, 166))
+                .setColorBackground(parent.color(60, 150, 215));
+;
     }
 
     public void setParent(PApplet parent) {
