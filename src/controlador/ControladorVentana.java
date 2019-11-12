@@ -95,27 +95,32 @@ public class ControladorVentana extends PApplet {
 
     @Override
     public void mouseClicked() {
+        String nombreEstado = " ";
         // Este if es para que no pongan vertices en el area donde estan los botones
         if (mouseX < width - 310) {
             // De acuerdo al estado del programa se hace una cosa u otra
             switch (controladorPrograma.getEstadoDelPrograma()) {
                 case 1: // Agregar estado inicial
-                    EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY), "VerticeNuevo");
+                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                    EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY), nombreEstado);
                     automata1.agregarEstado(estadoInicial);
                     break;
 
                 case 2: // Agregar estado normal
-                    EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY), "VerticeNuevo");
+                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                    EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY), nombreEstado);
                     automata1.agregarEstado(estadoNormal);
                     break;
 
                 case 3: // Agregar estado final
-                    EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY), "VerticeNuevo");
+                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                    EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY), nombreEstado);
                     automata1.agregarEstado(estadoFinal);
                     break;
 
                 case 4: // Agregar estado inicial-final
-                    EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY), "VerticeNuevo");
+                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                    EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY),nombreEstado);
                     automata1.agregarEstado(estadoInicialFinal);
                     break;
 
