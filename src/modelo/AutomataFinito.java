@@ -116,6 +116,7 @@ public class AutomataFinito {
 
         }
 
+        /*Si la palabra no es vacía no es aceptada*/
         if (!palabra.equals("")) {
             System.out.println("Palabra no aceptada por tener condiciones");
         }
