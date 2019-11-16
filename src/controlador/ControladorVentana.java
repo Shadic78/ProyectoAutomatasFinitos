@@ -139,14 +139,14 @@ public class ControladorVentana extends PApplet {
                         /**
                          * ***************************************************
                          * BORRAR CONEXION
-                         ***************************************************
+                         * **************************************************
                          */
                         if (controladorPrograma.isBorrandoConexion()) {
                             println("Borrando conexion");
                         } /**
                          * ***************************************************
                          * AGREGAR CONEXION
-                         ***************************************************
+                         * **************************************************
                          */
                         else {
                             String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
@@ -169,7 +169,12 @@ public class ControladorVentana extends PApplet {
 
                 case 12:
                     String palabra = JOptionPane.showInputDialog("Ingresa una palabra");
-                    automata1.iniciarAutomata(palabra);
+                    try {
+                        automata1.iniciarAutomata(palabra);
+                    } catch (NullPointerException ex) {
+                        System.out.println(ex.getMessage());
+                    }
+
                     break;
 
                 default:
@@ -201,7 +206,8 @@ public class ControladorVentana extends PApplet {
     }
 
     /**
-     * ******* Funcion que controla los eventos de los objetos graficos ********
+     * ******* Funcion que controla los eventos de los objetos graficos
+     * ********
      */
     public void controlEvent(CallbackEvent theEvent) {
         if (theEvent.getController().isMousePressed()) {
