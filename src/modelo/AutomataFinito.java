@@ -93,25 +93,39 @@ public class AutomataFinito {
         /*Ciclo para comparar cada caracter*/
         int cont = 0;
         while (palabra.length() != 0 && cont < getListaEstados().size()) {
+            if (getMatrizDeCondiciones()[estado][cont].length() > 2) {
 
-            if (getMatrizDeCondiciones()[estado][cont].equals(palabra.charAt(0) + "")) {//comprueba el primer caracter
-                System.out.print(palabra.charAt(0) + " ");
-                palabra = palabra.substring(1, palabra.length()); //Desplaza la cadena quitando el primer caracter
-                estado = cont;
-                cont = 0;
-            } else {
-                cont++;
-            }
-
-            /*Pregunta si la palabra es vacia de ser asi se aceptara la palabra,
-             pero si el estado en el que se encuentra no es final no se aceptara.*/
-            if (palabra.equals("")) {
-                if (getListaEstados().get(estado) instanceof EstadoFinal) {
-                    System.out.println("Palabra aceptada");
-                } else {
-                    System.out.println("Palabra no aceptada por no ser estado final");
+                String[] caracteres = getMatrizDeCondiciones()[estado][cont].split("[,]");
+                for (int i = 0; i < caracteres.length; i++) {
+                    if (caracteres[i].equals(palabra.charAt(0) + "")) {
+                        System.out.print(palabra.charAt(0) + "");
+                        palabra = palabra.substring(1, palabra.length());
+                        estado = cont;
+                        cont = 0;
+                    }
                 }
-                break;
+                cont++;
+
+            } else {
+                if (getMatrizDeCondiciones()[estado][cont].equals(palabra.charAt(0) + "")) {//comprueba el primer caracter
+                    System.out.print(palabra.charAt(0) + " ");
+                    palabra = palabra.substring(1, palabra.length()); //Desplaza la cadena quitando el primer caracter
+                    estado = cont;
+                    cont = 0;
+                } else {
+                    cont++;
+                }
+
+                /*Pregunta si la palabra es vacia de ser asi se aceptara la palabra,
+                 pero si el estado en el que se encuentra no es final no se aceptara.*/
+                if (palabra.equals("")) {
+                    if (getListaEstados().get(estado) instanceof EstadoFinal) {
+                        System.out.println("Palabra aceptada");
+                    } else {
+                        System.out.println("Palabra no aceptada por no ser estado final");
+                    }
+                    break;
+                }
             }
 
         }
