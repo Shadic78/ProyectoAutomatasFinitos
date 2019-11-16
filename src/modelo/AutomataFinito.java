@@ -102,8 +102,10 @@ public class AutomataFinito {
                         palabra = palabra.substring(1, palabra.length());
                         estado = cont;
                         cont = 0;
+                        break;
                     }
                 }
+
                 cont++;
 
             } else {
@@ -116,19 +118,20 @@ public class AutomataFinito {
                     cont++;
                 }
 
-                /*Pregunta si la palabra es vacia de ser asi se aceptara la palabra,
-                 pero si el estado en el que se encuentra no es final no se aceptara.*/
-                if (palabra.equals("")) {
-                    if (getListaEstados().get(estado) instanceof EstadoFinal) {
-                        System.out.println("Palabra aceptada");
-                    } else {
-                        System.out.println("Palabra no aceptada por no ser estado final");
-                    }
-                    break;
+            }
+            /*Pregunta si la palabra es vacia de ser asi se aceptara la palabra,
+             pero si el estado en el que se encuentra no es final no se aceptara.*/
+            if (palabra.equals("")) {
+                if (getListaEstados().get(estado) instanceof EstadoFinal) {
+                    System.out.println("Palabra aceptada");
+                } else {
+                    System.out.println("Palabra no aceptada por no ser estado final");
                 }
+                break;
             }
 
         }
+
 
         /*Si la palabra no es vacía no es aceptada*/
         if (!palabra.equals("")) {
