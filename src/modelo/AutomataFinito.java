@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.ArrayList;
-
 import processing.core.PApplet;
 
 public class AutomataFinito {
@@ -33,6 +32,15 @@ public class AutomataFinito {
         }
     }
 
+    public void imprimirMatriz() {
+        for (int i = 0; i < listaEstados.size(); i++) {
+            for (int j = 0; j < listaEstados.size(); j++) {
+                System.out.print(matrizDeCondiciones[i][j] + " ");
+            }
+            System.out.println("");
+        }
+    }
+
     public int getEstadoClickeado() {
         int estadoClickeado = -1;
         for (int i = 0; i < getListaEstados().size(); i++) {
@@ -43,6 +51,62 @@ public class AutomataFinito {
             }
         }
         return estadoClickeado;
+    }
+
+    public void eliminarEstado(int estado) {
+        getListaEstados().remove(estado);
+    }
+
+    public void eliminarConexiones(int estado) {
+
+        for (int i = 0; i < getListaConexiones().size(); i++) {
+            if (getListaEstados().get(estado).equals(getListaConexiones().get(i).getDestino())) {
+                getListaConexiones().remove(i);
+            }
+        }
+        for (int i = 0; i < getListaConexiones().size(); i++) {
+            if (getListaEstados().get(estado).equals(getListaConexiones().get(i).getOrigen())) {
+                getListaConexiones().remove(i);
+            }
+        }
+        if (estado >= 0) {
+            moverColumnasMatriz(getListaEstados().size(), getListaEstados().size(), estado);
+            System.out.println("El estado " + getListaEstados().get(estado).getNombre() + " ha sido eliminado");
+            moverFilasMatriz(getListaEstados().size(), getListaEstados().size(), estado);
+            eliminarEstado(estado);
+        }
+    }
+
+    public void moverFilasMatriz(int filasMatriz, int columnasMatriz, int posicion) {
+        if (posicion >= 0 && posicion < filasMatriz) {
+
+            for (int i = posicion; i < filasMatriz; i++) {
+                for (int j = 0; j < columnasMatriz; j++) {
+                    if (i == filasMatriz - 1) {
+                        matrizDeCondiciones[i][j] = "-";
+                    } else {
+                        matrizDeCondiciones[i][j] = matrizDeCondiciones[i + 1][j];
+                    }
+
+                }
+            }
+        }
+    }
+
+    public void moverColumnasMatriz(int filasMatriz, int columnasMatriz, int posicion) {
+        if (posicion >= 0 && posicion < columnasMatriz) {
+
+            for (int i = 0; i < filasMatriz; i++) {
+                for (int j = posicion; j < columnasMatriz; j++) {
+                    if (j == columnasMatriz - 1) {
+                        matrizDeCondiciones[i][j] = "";
+                    } else {
+                        matrizDeCondiciones[i][j] = matrizDeCondiciones[i][j + 1];
+                    }
+
+                }
+            }
+        }
     }
 
     public int distanciaEntrePuntos(int x1, int y1, int x2, int y2) {
@@ -56,18 +120,17 @@ public class AutomataFinito {
         } else {
             matrizDeCondiciones[estado1][estado2] = condicion;
             // Conexion normal
-            if(estado1 != estado2) {
+            if (estado1 != estado2) {
                 PApplet.println("Conexion: Estado1: " + estado1 + " | Estado2: " + estado2 + " | " + "Condicion: " + matrizDeCondiciones[estado1][estado2]);
                 Condicion condicionNueva = new Condicion(parent, new Punto(0, 0), condicion);
-                listaConexiones.add(new ConexionNormal(parent, listaEstados.get(estado1), listaEstados.get(estado2), condicionNueva));                
-            }
-            // Conexion bucle
+                listaConexiones.add(new ConexionNormal(parent, listaEstados.get(estado1), listaEstados.get(estado2), condicionNueva));
+            } // Conexion bucle
             else {
                 PApplet.println("Conexion bucle: Estado1: " + estado1 + " | Estado2: " + estado2 + " | " + "Condicion: " + matrizDeCondiciones[estado1][estado2]);
                 Condicion condicionNueva = new Condicion(parent, new Punto(0, 0), condicion);
                 listaConexiones.add(new ConexionBucle(parent, listaEstados.get(estado1), listaEstados.get(estado2), condicionNueva));
             }
-            
+
         }
     }
 
@@ -102,6 +165,5 @@ public class AutomataFinito {
     public void setMatrizDeCondiciones(String[][] matrizDeCondiciones) {
         this.matrizDeCondiciones = matrizDeCondiciones;
     }
-    
 
 }
