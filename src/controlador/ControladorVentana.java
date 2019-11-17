@@ -3,7 +3,9 @@ package controlador;
 import controlP5.CallbackEvent;
 import controlP5.CallbackListener;
 import controlP5.ControlP5;
+import controlP5.Textfield;
 import controlP5.Toggle;
+import java.awt.TextField;
 import javax.swing.JOptionPane;
 import processing.core.PApplet;
 import static processing.core.PApplet.println;
@@ -238,6 +240,14 @@ public class ControladorVentana extends PApplet {
 
             }
         }
+    }
+
+    //Funcion que controla el boton y empieza a comprobar la cadena
+    void Submit() {
+        print("asdas");
+        String palabra = ventana.get(Textfield.class, "txt_Palabra").getText();
+        print(palabra);
+
     }
 
     // Dibuja una flecha entre dos puntos

@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 import processing.core.PApplet;
 
@@ -123,6 +124,7 @@ public class AutomataFinito {
              pero si el estado en el que se encuentra no es final no se aceptara.*/
             if (palabra.equals("")) {
                 if (getListaEstados().get(estado) instanceof EstadoFinal) {
+                    JOptionPane.showMessageDialog(null, "Palabra es aceptada");
                     System.out.println("Palabra aceptada");
                 } else {
                     System.out.println("Palabra no aceptada por no ser estado final");
