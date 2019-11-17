@@ -173,6 +173,7 @@ public class ControladorVentana extends PApplet {
                         automata1.iniciarAutomata(palabra);
                     } catch (NullPointerException ex) {
                         System.out.println(ex.getMessage());
+
                     }
 
                     break;
