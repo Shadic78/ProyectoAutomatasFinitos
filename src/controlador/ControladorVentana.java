@@ -5,9 +5,9 @@ import controlP5.CallbackListener;
 import controlP5.ControlP5;
 import controlP5.Toggle;
 import javax.swing.JOptionPane;
+import modelo.*;
 import processing.core.PApplet;
 import static processing.core.PApplet.println;
-import modelo.*;
 import processing.core.PFont;
 import vista.*;
 
@@ -100,30 +100,53 @@ public class ControladorVentana extends PApplet {
             switch (controladorPrograma.getEstadoDelPrograma()) {
                 case 1: // Agregar estado inicial
                     nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
-                    EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY), nombreEstado);
-                    automata1.agregarEstado(estadoInicial);
+                    if (nombreEstado != null) {
+                        EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY), nombreEstado);
+                        automata1.agregarEstado(estadoInicial);
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debe de ingresar un nombre");
+                    }
+
                     break;
 
                 case 2: // Agregar estado normal
                     nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
-                    EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY), nombreEstado);
-                    automata1.agregarEstado(estadoNormal);
+                    if (nombreEstado != null) {
+                        EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY), nombreEstado);
+                        automata1.agregarEstado(estadoNormal);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debe de ingresar un nombre");
+                    }
                     break;
 
                 case 3: // Agregar estado final
                     nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
-                    EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY), nombreEstado);
-                    automata1.agregarEstado(estadoFinal);
+                    if (nombreEstado != null) {
+                        EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY), nombreEstado);
+                        automata1.agregarEstado(estadoFinal);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debe de ingresar un nombre");
+                    }
                     break;
 
                 case 4: // Agregar estado inicial-final
                     nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
-                    EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY), nombreEstado);
-                    automata1.agregarEstado(estadoInicialFinal);
+                    if (nombreEstado != null) {
+                        EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY), nombreEstado);
+                        automata1.agregarEstado(estadoInicialFinal);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Debe de ingresar un nombre");
+                    }
                     break;
 
                 case 6: // Borrar estado
-                    println("Borrando estado");
+                    if (automata1.getEstadoClickeado() >= 0) {
+                        automata1.imprimirMatriz();
+                        automata1.eliminarConexiones(automata1.getEstadoClickeado());
+                        System.out.println("matrizDeCondiciones Actualizado");
+                        automata1.imprimirMatriz();
+                    }
                     break;
 
                 case 7: // Primer click para agregar una conexion entre estados
@@ -143,7 +166,8 @@ public class ControladorVentana extends PApplet {
                          */
                         if (controladorPrograma.isBorrandoConexion()) {
                             println("Borrando conexion");
-                        } /**
+                        } 
+                        /**
                          * ***************************************************
                          * AGREGAR CONEXION
                          ***************************************************
@@ -201,7 +225,7 @@ public class ControladorVentana extends PApplet {
     }
 
     /**
-     * ******* Funcion que controla los eventos de los objetos graficos ********
+     ******** Funcion que controla los eventos de los objetos graficos ********
      */
     public void controlEvent(CallbackEvent theEvent) {
         if (theEvent.getController().isMousePressed()) {

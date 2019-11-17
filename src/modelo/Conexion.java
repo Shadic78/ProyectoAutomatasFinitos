@@ -12,6 +12,7 @@ import processing.core.PApplet;
  * @author Usuario
  */
 public abstract class Conexion {
+
     private Estado origen;
     private Estado destino;
     private Condicion condicion;
@@ -66,7 +67,7 @@ public abstract class Conexion {
     public void setColorRelleno(int colorRelleno) {
         this.colorRelleno = colorRelleno;
     }
-    
+
     public abstract void show();
-    
+
 }
