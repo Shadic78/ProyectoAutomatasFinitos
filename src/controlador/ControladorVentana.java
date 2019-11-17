@@ -15,7 +15,7 @@ public class ControladorVentana extends PApplet {
 
     // El objeto que usaremos para crear la interfaz de usuario
     ControlP5 ventana;
-    CallbackListener cb;        
+    CallbackListener cb;
     AutomataFinito automata1;
     EstadoDelPrograma controladorPrograma;
     PFont fuenteMenu;
@@ -30,12 +30,12 @@ public class ControladorVentana extends PApplet {
     @Override
     public void setup() {
         fuenteMenu = createFont("Fuentes/OpenSans-SemiBold.ttf", 14);
-        
+
         VentanaPrincipal ventana1 = new VentanaPrincipal(this);
         ventana = ventana1.getButton();
         automata1 = new AutomataFinito(this);
         controladorPrograma = new EstadoDelPrograma(this, ventana);
-        
+
         // Se declara el listener y hace que el mouse cambie al pasar sobre un objeto grafico
         cb = new CallbackListener() {
             public void controlEvent(CallbackEvent theEvent) {
@@ -50,7 +50,7 @@ public class ControladorVentana extends PApplet {
                 }
             }
         };
-        ventana.addCallback(cb);       
+        ventana.addCallback(cb);
 
         textAlign(CENTER, CENTER);
         textSize(14);
@@ -64,8 +64,8 @@ public class ControladorVentana extends PApplet {
         background(243, 243, 243);
         noStroke();
         fill(255);
-        rect(width - 290, 0, 290, height);        
-        fill(60, 150, 215); 
+        rect(width - 290, 0, 290, height);
+        fill(60, 150, 215);
         // Titulo del menu
         rect(width - 290, 0, 290, 40);
         // Barra separadora del menu
@@ -73,20 +73,18 @@ public class ControladorVentana extends PApplet {
 
         automata1.imprimirConexiones();
         automata1.imprimirEstados();
-        
 
         fill(0, 0, 0);
-        textSize(16);      
+        textSize(16);
         text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);
         text("Borrando conexion: " + controladorPrograma.isBorrandoConexion(), width / 2, height - 60);
-        
+
         /*Funcion que dibuja una linea de referencia para insertar una conexion*/
-        if(controladorPrograma.getEstadoDelPrograma() == 8){
+        if (controladorPrograma.getEstadoDelPrograma() == 8) {
             Punto puntoEstado = automata1.getListaEstados().get(controladorPrograma.getEstadoClick1()).getCoordenadas();
-            if(controladorPrograma.isBorrandoConexion()) {
+            if (controladorPrograma.isBorrandoConexion()) {
                 colorFlecha = color(255, 141, 141);
-            }
-            else {
+            } else {
                 colorFlecha = color(155, 92, 181);
             }
             dibujarFlecha(puntoEstado.getX(), puntoEstado.getY(), mouseX, mouseY, 0, 5, 0, colorFlecha, colorFlecha, true);
@@ -95,27 +93,32 @@ public class ControladorVentana extends PApplet {
 
     @Override
     public void mouseClicked() {
+        String nombreEstado = " ";
         // Este if es para que no pongan vertices en el area donde estan los botones
         if (mouseX < width - 310) {
             // De acuerdo al estado del programa se hace una cosa u otra
             switch (controladorPrograma.getEstadoDelPrograma()) {
                 case 1: // Agregar estado inicial
-                    EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY), "VerticeNuevo");
+                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                    EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY), nombreEstado);
                     automata1.agregarEstado(estadoInicial);
                     break;
 
                 case 2: // Agregar estado normal
-                    EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY), "VerticeNuevo");
+                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                    EstadoNormal estadoNormal = new EstadoNormal(this, new Punto(mouseX, mouseY), nombreEstado);
                     automata1.agregarEstado(estadoNormal);
                     break;
 
                 case 3: // Agregar estado final
-                    EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY), "VerticeNuevo");
+                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                    EstadoFinal estadoFinal = new EstadoFinal(this, new Punto(mouseX, mouseY), nombreEstado);
                     automata1.agregarEstado(estadoFinal);
                     break;
 
                 case 4: // Agregar estado inicial-final
-                    EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY), "VerticeNuevo");
+                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                    EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY), nombreEstado);
                     automata1.agregarEstado(estadoInicialFinal);
                     break;
 
@@ -132,33 +135,41 @@ public class ControladorVentana extends PApplet {
 
                 case 8: // Segundo click para agregar una conexion entre estados
                     if (automata1.getEstadoClickeado() >= 0) {
-                        controladorPrograma.setEstadoClick2(automata1.getEstadoClickeado());                        
-                        /*****************************************************
-                         *                  BORRAR CONEXION
-                         ****************************************************/
-                        if(controladorPrograma.isBorrandoConexion()) {
+                        controladorPrograma.setEstadoClick2(automata1.getEstadoClickeado());
+                        /**
+                         * ***************************************************
+                         * BORRAR CONEXION
+                         ***************************************************
+                         */
+                        if (controladorPrograma.isBorrandoConexion()) {
                             println("Borrando conexion");
-                        }
-                        /*****************************************************
-                         *                AGREGAR CONEXION
-                         ****************************************************/                              
-                        else {                      
+                        } /**
+                         * ***************************************************
+                         * AGREGAR CONEXION
+                         ***************************************************
+                         */
+                        else {
                             String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                            automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);                            
+                            automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);
                         }
                         controladorPrograma.setEstadoClick1(-1);
                         controladorPrograma.setEstadoClick2(-1);
                         controladorPrograma.actualizarEstadoDelPrograma(7);
                     }
                     break;
-                    
+
                 case 9: // Agregar conexion bucle
-                    if(automata1.getEstadoClickeado() >= 0) {
+                    if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick1(automata1.getEstadoClickeado());
                         String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                        automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick1(), condicion);    
-                        controladorPrograma.setEstadoClick1(-1);                        
+                        automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick1(), condicion);
+                        controladorPrograma.setEstadoClick1(-1);
                     }
+                    break;
+
+                case 12:
+                    String palabra = JOptionPane.showInputDialog("Ingresa una palabra");
+                    automata1.iniciarAutomata(palabra);
                     break;
 
                 default:
@@ -168,7 +179,7 @@ public class ControladorVentana extends PApplet {
     }
 
     public void mouseDragged() {
-        if (mouseX < width - 310){
+        if (mouseX < width - 310) {
             if (controladorPrograma.getEstadoDelPrograma() == 5) {
                 if (!controladorPrograma.getMoviendoEstado()) {
                     controladorPrograma.setEstadoMoviendoID(automata1.getEstadoClickeado());
@@ -189,31 +200,31 @@ public class ControladorVentana extends PApplet {
         }
     }
 
-    /********* Funcion que controla los eventos de los objetos graficos *********/
+    /**
+     * ******* Funcion que controla los eventos de los objetos graficos ********
+     */
     public void controlEvent(CallbackEvent theEvent) {
         if (theEvent.getController().isMousePressed()) {
             // Si se presiono un boton toggle
             if (theEvent.getController() instanceof Toggle) {
-                
-                if(theEvent.getController().getId() != 10) {
-                    controladorPrograma.setBorrandoConexion(false);                   
+
+                if (theEvent.getController().getId() != 10) {
+                    controladorPrograma.setBorrandoConexion(false);
                 }
-                               
+
                 if (((Toggle) theEvent.getController()).getState() == true) {
                     // Si se presiono borrarConexion entonces se pasa al estado de dar el primer click pero se activa la variable borrandoConexion
-                    if(theEvent.getController().getId() == 10) {
-                        controladorPrograma.setBorrandoConexion(true);                        
+                    if (theEvent.getController().getId() == 10) {
+                        controladorPrograma.setBorrandoConexion(true);
                         controladorPrograma.actualizarEstadoDelPrograma(7);
+                    } else {
+                        controladorPrograma.actualizarEstadoDelPrograma(theEvent.getController().getId());
                     }
-                    else {
-                        controladorPrograma.actualizarEstadoDelPrograma(theEvent.getController().getId());                        
-                    }
-                    
-                } 
-                else {                    
+
+                } else {
                     controladorPrograma.actualizarEstadoDelPrograma(0);
                     // Si se desactivo el boton de borrar conexion
-                    if(theEvent.getController().getId() == 10) {
+                    if (theEvent.getController().getId() == 10) {
                         controladorPrograma.setBorrandoConexion(false);
                     }
                 }
@@ -221,9 +232,9 @@ public class ControladorVentana extends PApplet {
             }
         }
     }
-    
+
     // Dibuja una flecha entre dos puntos
-void dibujarFlecha(float x0, float y0, float x1, float y1, float tamTrianguloInicio, float tamTrianguloFinal, int desfaceFlecha, int colorTriangulo, int colorLinea, boolean dibujarLinea) {
+    void dibujarFlecha(float x0, float y0, float x1, float y1, float tamTrianguloInicio, float tamTrianguloFinal, int desfaceFlecha, int colorTriangulo, int colorLinea, boolean dibujarLinea) {
         // Obtener el angulo entre los puntos
         float angulo = atan2(y1 - y0, x1 - x0);
 
@@ -244,7 +255,7 @@ void dibujarFlecha(float x0, float y0, float x1, float y1, float tamTrianguloIni
             fill(colorTriangulo);
             stroke(colorTriangulo);
             triangle(-tamTrianguloInicio - desfaceFlecha, -tamTrianguloInicio,
-                    -tamTrianguloInicio  - desfaceFlecha, tamTrianguloInicio,
+                    -tamTrianguloInicio - desfaceFlecha, tamTrianguloInicio,
                     -desfaceFlecha, 0);
             popMatrix();
         }
@@ -256,12 +267,12 @@ void dibujarFlecha(float x0, float y0, float x1, float y1, float tamTrianguloIni
             rotate(angulo);
             fill(colorTriangulo);
             stroke(colorTriangulo);
-            triangle(-tamTrianguloFinal  - desfaceFlecha, -tamTrianguloFinal,
+            triangle(-tamTrianguloFinal - desfaceFlecha, -tamTrianguloFinal,
                     -tamTrianguloFinal - desfaceFlecha, tamTrianguloFinal,
                     -desfaceFlecha, 0);
             popMatrix();
         }
         noFill();
-    }  
-    
+    }
+
 }
