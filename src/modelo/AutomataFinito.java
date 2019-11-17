@@ -1,7 +1,6 @@
 package modelo;
 
 import java.util.ArrayList;
-
 import processing.core.PApplet;
 
 public class AutomataFinito {
@@ -33,6 +32,15 @@ public class AutomataFinito {
         }
     }
 
+    public void imprimirMatriz() {
+        for (int i = 0; i < listaEstados.size(); i++) {
+            for (int j = 0; j < listaEstados.size(); j++) {
+                System.out.print(matrizDeCondiciones[i][j] + " ");
+            }
+            System.out.println("");
+        }
+    }
+
     public int getEstadoClickeado() {
         int estadoClickeado = -1;
         for (int i = 0; i < getListaEstados().size(); i++) {
@@ -43,6 +51,66 @@ public class AutomataFinito {
             }
         }
         return estadoClickeado;
+    }
+
+    public void eliminarEstado(int estado) {
+        getListaEstados().remove(estado);
+    }
+
+    public void eliminarConexiones(int estado) {
+
+        for (int i = 0; i < getListaConexiones().size(); i++) {
+            PApplet.println("Estado: " + getListaEstados().get(estado) + "  |   Conexion destino: " + getListaConexiones().get(i).getDestino());
+            if (getListaEstados().get(estado).equals(getListaConexiones().get(i).getDestino())) {
+                getListaConexiones().remove(i);
+                i--;
+            }
+        }
+        for (int i = 0; i < getListaConexiones().size(); i++) {
+            PApplet.println("Estado: " + getListaEstados().get(estado) + "  |   Conexion origen: " + getListaConexiones().get(i).getOrigen());            
+            if (getListaEstados().get(estado).equals(getListaConexiones().get(i).getOrigen())) {
+                getListaConexiones().remove(i);
+                i--;
+            }
+        }
+        if (estado >= 0) {
+            moverColumnasMatriz(getListaEstados().size(), getListaEstados().size(), estado);
+            System.out.println("El estado " + getListaEstados().get(estado).getNombre() + " ha sido eliminado");
+            moverFilasMatriz(getListaEstados().size(), getListaEstados().size(), estado);
+            eliminarEstado(estado);
+        }
+    }
+
+    public void moverFilasMatriz(int filasMatriz, int columnasMatriz, int posicion) {
+        if (posicion >= 0 && posicion < filasMatriz) {
+
+            for (int i = posicion; i < filasMatriz; i++) {
+                for (int j = 0; j < columnasMatriz; j++) {
+                    if (i == filasMatriz - 1) {
+                        matrizDeCondiciones[i][j] = "-";
+                    } else {
+                        matrizDeCondiciones[i][j] = matrizDeCondiciones[i + 1][j];
+                    }
+
+                }
+            }
+        }
+    }
+
+    public void moverColumnasMatriz(int filasMatriz, int columnasMatriz, int posicion) {
+        if (posicion >= 0 && posicion < columnasMatriz) {
+
+            for (int i = 0; i < filasMatriz; i++) {
+                for (int j = posicion; j < columnasMatriz; j++) {
+                    if (j == columnasMatriz - 1) {
+                        matrizDeCondiciones[i][j] = "-";
+                    } else {
+                        matrizDeCondiciones[i][j] = matrizDeCondiciones[i][j + 1];
+                    }
+
+                }
+            }
+        }
     }
 
     public int distanciaEntrePuntos(int x1, int y1, int x2, int y2) {
