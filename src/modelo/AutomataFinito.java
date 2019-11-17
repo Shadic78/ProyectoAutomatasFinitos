@@ -60,13 +60,17 @@ public class AutomataFinito {
     public void eliminarConexiones(int estado) {
 
         for (int i = 0; i < getListaConexiones().size(); i++) {
+            PApplet.println("Estado: " + getListaEstados().get(estado) + "  |   Conexion destino: " + getListaConexiones().get(i).getDestino());
             if (getListaEstados().get(estado).equals(getListaConexiones().get(i).getDestino())) {
                 getListaConexiones().remove(i);
+                i--;
             }
         }
         for (int i = 0; i < getListaConexiones().size(); i++) {
+            PApplet.println("Estado: " + getListaEstados().get(estado) + "  |   Conexion origen: " + getListaConexiones().get(i).getOrigen());            
             if (getListaEstados().get(estado).equals(getListaConexiones().get(i).getOrigen())) {
                 getListaConexiones().remove(i);
+                i--;
             }
         }
         if (estado >= 0) {
@@ -99,7 +103,7 @@ public class AutomataFinito {
             for (int i = 0; i < filasMatriz; i++) {
                 for (int j = posicion; j < columnasMatriz; j++) {
                     if (j == columnasMatriz - 1) {
-                        matrizDeCondiciones[i][j] = "";
+                        matrizDeCondiciones[i][j] = "-";
                     } else {
                         matrizDeCondiciones[i][j] = matrizDeCondiciones[i][j + 1];
                     }
