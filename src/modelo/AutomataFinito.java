@@ -82,14 +82,7 @@ public class AutomataFinito {
     public void iniciarAutomata(String palabra) {
 
         /*Variable que controla las filas, las cuales representan el estado en el que se encuentra el automata*/
-        int estado = 0;
-
-        /*Encontrar el estado inicial*/
-        for (int i = 0; i < getListaEstados().size(); i++) {
-            if (getListaEstados().get(i) instanceof EstadoInicial || getListaEstados().get(i) instanceof EstadoInicialFinal) {
-                estado = i;
-            }
-        }
+        int estado = encontrarEstadoInicial();
 
         /*Ciclo para comparar cada caracter*/
         int cont = 0;
@@ -99,7 +92,8 @@ public class AutomataFinito {
                 String[] caracteres = getMatrizDeCondiciones()[estado][cont].split("[,]");
                 for (int i = 0; i < caracteres.length; i++) {
                     if (caracteres[i].equals(palabra.charAt(0) + "")) {
-                        System.out.print(palabra.charAt(0) + "");
+                        getListaEstados().get(estado).setColorBackground(parent.color(0, 0, 0, 0));
+                        System.out.print(palabra.charAt(0) + " ");
                         palabra = palabra.substring(1, palabra.length());
                         estado = cont;
                         cont = 0;
@@ -112,9 +106,11 @@ public class AutomataFinito {
             } else {
                 if (getMatrizDeCondiciones()[estado][cont].equals(palabra.charAt(0) + "")) {//comprueba el primer caracter
                     System.out.print(palabra.charAt(0) + " ");
+                    getListaEstados().get(estado).setColorBackground(parent.color(0, 0, 0, 0));
                     palabra = palabra.substring(1, palabra.length()); //Desplaza la cadena quitando el primer caracter
                     estado = cont;
                     cont = 0;
+
                 } else {
                     cont++;
                 }
@@ -126,6 +122,7 @@ public class AutomataFinito {
                 if (getListaEstados().get(estado) instanceof EstadoFinal) {
                     JOptionPane.showMessageDialog(null, "Palabra es aceptada");
                     System.out.println("Palabra aceptada");
+                    getListaEstados().get(estado).setColorBackground(parent.color(0, 0, 0, 0));
                 } else {
                     System.out.println("Palabra no aceptada por no ser estado final");
                 }
@@ -140,6 +137,20 @@ public class AutomataFinito {
             System.out.println("Palabra no aceptada por tener condiciones");
         }
 
+    }
+
+    public int encontrarEstadoInicial() {
+        /*Variable que controla las filas, las cuales representan el estado en el que se encuentra el automata*/
+        int estado = 0;
+
+        /*Encontrar el estado inicial*/
+        for (int i = 0; i < getListaEstados().size(); i++) {
+            if (getListaEstados().get(i) instanceof EstadoInicial || getListaEstados().get(i) instanceof EstadoInicialFinal) {
+                estado = i;
+            }
+        }
+
+        return estado;
     }
 
     public ArrayList<Estado> getListaEstados() {

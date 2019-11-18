@@ -134,7 +134,7 @@ public class VentanaPrincipal {
                 .setFont(fuenteMenu)
                 .setColorCursor(parent.color(159, 162, 166))
                 .setLabelVisible(false)
-                .setAutoClear(true);
+                .setAutoClear(false);
 
         b.addBang("Submit")
                 .setPosition(parent.width - 80, 440)
