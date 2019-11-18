@@ -195,14 +195,14 @@ public class ControladorVentana extends PApplet {
                     }
                     break;
 
-                case 12:
+                case 12://darle click al cuando el boton paso a paso este activo
                     if (cont >= 1) {//para regresar el color del estado anterior
                         automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont - 1]).setColorBackground(parent.color(81, 237, 236));
                     }
                     String palabra = ventana.get(Textfield.class, "txtPalabra").getText();//lee la palabra
 
                     automata1.llenarEstadosConCoicidencia(palabra);//funcion que rellena un array
-                    automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]).setColorBackground(parent.color(251, 186, 0));
+                    automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]).setColorBackground(parent.color(251, 186, 0));//cambia el estado a color amarrillo
                     if (automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]) instanceof EstadoFinal && cont == palabra.length()) {
                         JOptionPane.showMessageDialog(null, "Palabra Aceptada");
 
@@ -211,7 +211,7 @@ public class ControladorVentana extends PApplet {
                     }
                     System.out.print(cont + ". " + automata1.getEstadosConCoicidencia()[cont] + " ");
                     //System.out.print(cont + " ");
-                    if (cont > palabra.length()) {
+                    if (cont > palabra.length()) {//para reiniciar el cont
                         cont = 0;
                         automata1.resetColor();
                         break;
