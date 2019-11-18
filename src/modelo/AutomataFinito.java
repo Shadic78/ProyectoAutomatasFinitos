@@ -1,11 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import javax.swing.JOptionPane;
-
-=======
->>>>>>> master
 import processing.core.PApplet;
 
 public class AutomataFinito {
@@ -14,10 +10,12 @@ public class AutomataFinito {
     private ArrayList<Conexion> listaConexiones = new ArrayList<Conexion>();
     private PApplet parent;
     private String[][] matrizDeCondiciones;
+    private int[] estadosConCoicidencia;
 
     public AutomataFinito(PApplet p) {
         parent = p;
         matrizDeCondiciones = new String[50][50];
+        estadosConCoicidencia = new int[50];
         inicializarMatriz(matrizDeCondiciones, 50, "-");
     }
 
@@ -72,7 +70,7 @@ public class AutomataFinito {
             }
         }
         for (int i = 0; i < getListaConexiones().size(); i++) {
-            PApplet.println("Estado: " + getListaEstados().get(estado) + "  |   Conexion origen: " + getListaConexiones().get(i).getOrigen());            
+            PApplet.println("Estado: " + getListaEstados().get(estado) + "  |   Conexion origen: " + getListaConexiones().get(i).getOrigen());
             if (getListaEstados().get(estado).equals(getListaConexiones().get(i).getOrigen())) {
                 getListaConexiones().remove(i);
                 i--;
@@ -164,7 +162,6 @@ public class AutomataFinito {
                 String[] caracteres = getMatrizDeCondiciones()[estado][cont].split("[,]");
                 for (int i = 0; i < caracteres.length; i++) {
                     if (caracteres[i].equals(palabra.charAt(0) + "")) {
-                        getListaEstados().get(estado).setColorBackground(parent.color(0, 0, 0, 0));
                         System.out.print(palabra.charAt(0) + " ");
                         palabra = palabra.substring(1, palabra.length());
                         estado = cont;
@@ -178,7 +175,6 @@ public class AutomataFinito {
             } else {
                 if (getMatrizDeCondiciones()[estado][cont].equals(palabra.charAt(0) + "")) {//comprueba el primer caracter
                     System.out.print(palabra.charAt(0) + " ");
-                    getListaEstados().get(estado).setColorBackground(parent.color(0, 0, 0, 0));
                     palabra = palabra.substring(1, palabra.length()); //Desplaza la cadena quitando el primer caracter
                     estado = cont;
                     cont = 0;
@@ -197,6 +193,7 @@ public class AutomataFinito {
                     getListaEstados().get(estado).setColorBackground(parent.color(0, 0, 0, 0));
                 } else {
                     System.out.println("Palabra no aceptada por no ser estado final");
+                    JOptionPane.showMessageDialog(null, "Palabra no aceptada");
                 }
                 break;
             }
@@ -206,13 +203,67 @@ public class AutomataFinito {
 
         /*Si la palabra no es vacía no es aceptada*/
         if (!palabra.equals("")) {
+            JOptionPane.showMessageDialog(null, "Palabra no aceptada");
             System.out.println("Palabra no aceptada por tener condiciones");
         }
 
     }
 
-    public int encontrarEstadoInicial() {
+    public void llenarEstadosConCoicidencia(String palabra) {//funcion para llenar el array de estados, donde pasa por cada caracter que lee
+
         /*Variable que controla las filas, las cuales representan el estado en el que se encuentra el automata*/
+        int estado = encontrarEstadoInicial();
+
+        /*Ciclo para comparar cada caracter*/
+        int cont = 0;
+        int cont2 = 0;//contador para llenar el arrray
+
+        getEstadosConCoicidencia()[cont2] = estado;//le asgina al primer miembro del arrya el estado inicial
+        cont2++;
+        while (palabra.length() != 0 && cont < getListaEstados().size()) {//el mismo algoritmo que el de arriba
+            if (getMatrizDeCondiciones()[estado][cont].length() > 2) {
+
+                String[] caracteres = getMatrizDeCondiciones()[estado][cont].split("[,]");
+                for (int i = 0; i < caracteres.length; i++) {
+                    if (caracteres[i].equals(palabra.charAt(0) + "")) {
+
+                        palabra = palabra.substring(1, palabra.length());
+                        estado = cont;
+                        getEstadosConCoicidencia()[cont2] = estado;
+                        cont2++;
+                        cont = 0;
+                        break;
+                    }
+                }
+
+                cont++;
+
+            } else {
+                if (getMatrizDeCondiciones()[estado][cont].equals(palabra.charAt(0) + "")) {//comprueba el primer caracter
+
+                    palabra = palabra.substring(1, palabra.length()); //Desplaza la cadena quitando el primer caracter
+                    estado = cont;
+                    getEstadosConCoicidencia()[cont2] = estado;
+                    cont2++;
+                    cont = 0;
+
+                } else {
+                    cont++;
+                }
+
+            }
+            if (palabra.equals("")) {
+                if (getListaEstados().get(estado) instanceof EstadoFinal) {
+                    getEstadosConCoicidencia()[cont2] = estado;
+                    cont2++;
+                }
+                break;
+            }
+        }
+    }
+
+    public int encontrarEstadoInicial() {//funcion para encontrar el estado inicial
+
         int estado = 0;
 
         /*Encontrar el estado inicial*/
@@ -223,6 +274,20 @@ public class AutomataFinito {
         }
 
         return estado;
+    }
+
+    public void resetColor() {//vuelve a su color original a los estados dentro del array EstadoConCoicidencia
+        for (int i = 0; i < getEstadosConCoicidencia().length; i++) {
+            getListaEstados().get(getEstadosConCoicidencia()[i]).setColorBackground(parent.color(81, 237, 236));
+        }
+    }
+
+    public int[] getEstadosConCoicidencia() {
+        return estadosConCoicidencia;
+    }
+
+    public void setEstadosConCoicidencia(int[] estadosConCoicidencia) {
+        this.estadosConCoicidencia = estadosConCoicidencia;
     }
 
     public ArrayList<Estado> getListaEstados() {

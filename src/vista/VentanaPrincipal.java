@@ -145,7 +145,7 @@ public class VentanaPrincipal {
         b.addToggle("BtnAddPasoSiguiente")
                 .setPosition(parent.width - 200, 490)
                 .setSize(widthBtn, heightBtn)
-                .setLabel("Paso siguiente")
+                .setLabel("Paso a paso")
                 .setId(12)
                 .setImages(parent.loadImage("PasoSiguiente1.png"), parent.loadImage("PasoSiguiente2.png"), parent.loadImage("PasoSiguiente2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);

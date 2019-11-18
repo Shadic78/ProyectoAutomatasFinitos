@@ -5,6 +5,7 @@ import controlP5.CallbackListener;
 import controlP5.ControlP5;
 import controlP5.Textfield;
 import controlP5.Toggle;
+import javafx.scene.paint.Color;
 import javax.swing.JOptionPane;
 import modelo.*;
 import processing.core.PApplet;
@@ -16,6 +17,8 @@ public class ControladorVentana extends PApplet {
 
     // El objeto que usaremos para crear la interfaz de usuario
     ControlP5 ventana;
+    int cont = 0;
+    PApplet parent = new PApplet();
     CallbackListener cb;
     AutomataFinito automata1;
     EstadoDelPrograma controladorPrograma;
@@ -95,6 +98,7 @@ public class ControladorVentana extends PApplet {
     @Override
     public void mouseClicked() {
         String nombreEstado = " ";
+
         // Este if es para que no pongan vertices en el area donde estan los botones
         if (mouseX < width - 310) {
             // De acuerdo al estado del programa se hace una cosa u otra
@@ -167,8 +171,7 @@ public class ControladorVentana extends PApplet {
                          */
                         if (controladorPrograma.isBorrandoConexion()) {
                             println("Borrando conexion");
-                        } 
-                        /**
+                        } /**
                          * ***************************************************
                          * AGREGAR CONEXION
                          * **************************************************
@@ -193,8 +196,27 @@ public class ControladorVentana extends PApplet {
                     break;
 
                 case 12:
-                    String palabra = ventana.get(Textfield.class, "txtPalabra").getText();
-                    automata1.iniciarAutomata(palabra);
+                    if (cont >= 1) {//para regresar el color del estado anterior
+                        automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont - 1]).setColorBackground(parent.color(81, 237, 236));
+                    }
+                    String palabra = ventana.get(Textfield.class, "txtPalabra").getText();//lee la palabra
+
+                    automata1.llenarEstadosConCoicidencia(palabra);//funcion que rellena un array
+                    automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]).setColorBackground(parent.color(251, 186, 0));
+                    if (automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]) instanceof EstadoFinal && cont == palabra.length()) {
+                        JOptionPane.showMessageDialog(null, "Palabra Aceptada");
+
+                    } else if (cont == palabra.length()) {
+                        JOptionPane.showMessageDialog(null, "Palabra No Aceptada");
+                    }
+                    System.out.print(cont + ". " + automata1.getEstadosConCoicidencia()[cont] + " ");
+                    //System.out.print(cont + " ");
+                    if (cont > palabra.length()) {
+                        cont = 0;
+                        automata1.resetColor();
+                        break;
+                    }
+                    cont++;
 
                     break;
 
@@ -226,14 +248,7 @@ public class ControladorVentana extends PApplet {
         }
     }
 
-    /**
-<<<<<<< HEAD
-     * ******* Funcion que controla los eventos de los objetos graficos
-     * ********
-=======
-     ******** Funcion que controla los eventos de los objetos graficos ********
->>>>>>> master
-     */
+    /* Funcion que controla los eventos de los objetos graficos*/
     public void controlEvent(CallbackEvent theEvent) {
         if (theEvent.getController().isMousePressed()) {
             // Si se presiono un boton toggle
