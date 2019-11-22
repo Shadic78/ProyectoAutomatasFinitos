@@ -188,9 +188,8 @@ public class AutomataFinito {
              pero si el estado en el que se encuentra no es final no se aceptara.*/
             if (palabra.equals("")) {
                 if (getListaEstados().get(estado) instanceof EstadoFinal) {
-                    JOptionPane.showMessageDialog(null, "Palabra es aceptada");
+                    JOptionPane.showMessageDialog(null, "Palabra aceptada");
                     System.out.println("Palabra aceptada");
-                    getListaEstados().get(estado).setColorBackground(parent.color(0, 0, 0, 0));
                 } else {
                     System.out.println("Palabra no aceptada por no ser estado final");
                     JOptionPane.showMessageDialog(null, "Palabra no aceptada");
@@ -252,13 +251,7 @@ public class AutomataFinito {
                 }
 
             }
-            if (palabra.equals("")) {
-                if (getListaEstados().get(estado) instanceof EstadoFinal) {
-                    getEstadosConCoicidencia()[cont2] = estado;
-                    cont2++;
-                }
-                break;
-            }
+
         }
     }
 

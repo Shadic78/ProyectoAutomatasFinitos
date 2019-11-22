@@ -136,12 +136,11 @@ public class VentanaPrincipal {
                 .setLabelVisible(false)
                 .setAutoClear(false);
 
-        b.addBang("Submit")
+        b.addButton("Submit").setLabel("Comprobar")
                 .setPosition(parent.width - 80, 440)
-                .setSize(40, 40)
-                .setColorCaptionLabel(parent.color(159, 162, 166))
+                .setSize(50, 40)
+                .setColorCaptionLabel(parent.color(255, 255, 255))
                 .setColorBackground(parent.color(60, 150, 215));
-
         b.addToggle("BtnAddPasoSiguiente")
                 .setPosition(parent.width - 200, 490)
                 .setSize(widthBtn, heightBtn)

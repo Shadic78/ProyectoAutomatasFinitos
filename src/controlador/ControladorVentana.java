@@ -1,11 +1,11 @@
 package controlador;
 
+import controlP5.Button;
 import controlP5.CallbackEvent;
 import controlP5.CallbackListener;
 import controlP5.ControlP5;
 import controlP5.Textfield;
 import controlP5.Toggle;
-import javafx.scene.paint.Color;
 import javax.swing.JOptionPane;
 import modelo.*;
 import processing.core.PApplet;
@@ -59,6 +59,7 @@ public class ControladorVentana extends PApplet {
         textAlign(CENTER, CENTER);
         textSize(14);
         noStroke();
+
     }
 
     @Override
@@ -196,28 +197,34 @@ public class ControladorVentana extends PApplet {
                     break;
 
                 case 12://darle click al cuando el boton paso a paso este activo
-                    if (cont >= 1) {//para regresar el color del estado anterior
-                        automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont - 1]).setColorBackground(parent.color(81, 237, 236));
-                    }
                     String palabra = ventana.get(Textfield.class, "txtPalabra").getText();//lee la palabra
+                    try {
+                        if (cont > 0) {//para regresar el color del estado anterior
+                            automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont - 1]).setColorBackground(parent.color(81, 237, 236));
+                        }
+                        automata1.llenarEstadosConCoicidencia(palabra);//funcion que rellena un array
 
-                    automata1.llenarEstadosConCoicidencia(palabra);//funcion que rellena un array
-                    automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]).setColorBackground(parent.color(251, 186, 0));//cambia el estado a color amarrillo
-                    if (automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]) instanceof EstadoFinal && cont == palabra.length()) {
-                        JOptionPane.showMessageDialog(null, "Palabra Aceptada");
+                        automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]).setColorBackground(parent.color(251, 186, 0));//cambia el estado a color amarrillo
 
-                    } else if (cont == palabra.length()) {
-                        JOptionPane.showMessageDialog(null, "Palabra No Aceptada");
+                        System.out.print(cont + ". " + automata1.getEstadosConCoicidencia()[cont] + " ");
+                        //System.out.print(cont + " ");
+                        if (cont > palabra.length()) {//para reiniciar el cont
+                            cont = 0;
+                            automata1.resetColor();
+                            break;
+                        }
+
+                        if (automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]) instanceof EstadoFinal && cont == palabra.length()) {
+                            JOptionPane.showMessageDialog(null, "Palabra aceptada", "Yes", 1);
+
+                        } else if (cont == palabra.length()) {
+                            JOptionPane.showMessageDialog(null, "Palabra No Aceptada");
+                        }
+                        cont++;
+
+                    } catch (IndexOutOfBoundsException ex) {
+                        JOptionPane.showMessageDialog(null, "No existe estados");
                     }
-                    System.out.print(cont + ". " + automata1.getEstadosConCoicidencia()[cont] + " ");
-                    //System.out.print(cont + " ");
-                    if (cont > palabra.length()) {//para reiniciar el cont
-                        cont = 0;
-                        automata1.resetColor();
-                        break;
-                    }
-                    cont++;
-
                     break;
 
                 default:
@@ -279,15 +286,6 @@ public class ControladorVentana extends PApplet {
         }
     }
 
-    //Funcion que controla el boton y empieza a comprobar la cadena
-    void Submit() {
-        print("asdas");
-        String palabra = ventana.get(Textfield.class, "txtPalabra").getText();
-        automata1.iniciarAutomata(palabra);
-        print(palabra);
-
-    }
-
     // Dibuja una flecha entre dos puntos
     void dibujarFlecha(float x0, float y0, float x1, float y1, float tamTrianguloInicio, float tamTrianguloFinal, int desfaceFlecha, int colorTriangulo, int colorLinea, boolean dibujarLinea) {
         // Obtener el angulo entre los puntos
@@ -328,6 +326,16 @@ public class ControladorVentana extends PApplet {
             popMatrix();
         }
         noFill();
+    }
+
+    //Funcion que controla el boton y empieza a comprobar la cadena
+    public void Submit() {
+
+        print("asdas");
+        String palabra = ventana.get(Textfield.class, "txtPalabra").getText();
+        automata1.iniciarAutomata(palabra);
+        print(palabra);
+
     }
 
 }
