@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import processing.core.PApplet;
 
 public class AutomataFinito {
@@ -9,10 +10,12 @@ public class AutomataFinito {
     private ArrayList<Conexion> listaConexiones = new ArrayList<Conexion>();
     private PApplet parent;
     private String[][] matrizDeCondiciones;
+    private int[] estadosConCoicidencia;
 
     public AutomataFinito(PApplet p) {
         parent = p;
         matrizDeCondiciones = new String[50][50];
+        estadosConCoicidencia = new int[50];
         inicializarMatriz(matrizDeCondiciones, 50, "-");
     }
 
@@ -67,7 +70,7 @@ public class AutomataFinito {
             }
         }
         for (int i = 0; i < getListaConexiones().size(); i++) {
-            PApplet.println("Estado: " + getListaEstados().get(estado) + "  |   Conexion origen: " + getListaConexiones().get(i).getOrigen());            
+            PApplet.println("Estado: " + getListaEstados().get(estado) + "  |   Conexion origen: " + getListaConexiones().get(i).getOrigen());
             if (getListaEstados().get(estado).equals(getListaConexiones().get(i).getOrigen())) {
                 getListaConexiones().remove(i);
                 i--;
@@ -147,28 +150,90 @@ public class AutomataFinito {
     }
 
     public void iniciarAutomata(String palabra) {
+        if (this.getListaEstados().size() > 0) {
+            /*Variable que controla las filas, las cuales representan el estado en el que se encuentra el automata*/
+            int estado = encontrarEstadoInicial();
+
+            /*Ciclo para comparar cada caracter*/
+            int cont = 0;
+            while (palabra.length() != 0 && cont < getListaEstados().size()) {
+                if (getMatrizDeCondiciones()[estado][cont].length() > 2) {
+
+                    String[] caracteres = getMatrizDeCondiciones()[estado][cont].split("[,]");
+                    for (int i = 0; i < caracteres.length; i++) {
+                        if (caracteres[i].equals(palabra.charAt(0) + "")) {
+                            System.out.print(palabra.charAt(0) + " ");
+                            palabra = palabra.substring(1, palabra.length());
+                            estado = cont;
+                            cont = 0;
+                            break;
+                        }
+                    }
+
+                    cont++;
+
+                } else {
+                    if (getMatrizDeCondiciones()[estado][cont].equals(palabra.charAt(0) + "")) {//comprueba el primer caracter
+                        System.out.print(palabra.charAt(0) + " ");
+                        palabra = palabra.substring(1, palabra.length()); //Desplaza la cadena quitando el primer caracter
+                        estado = cont;
+                        cont = 0;
+
+                    } else {
+                        cont++;
+                    }
+
+                }
+                /*Pregunta si la palabra es vacia de ser asi se aceptara la palabra,
+                 pero si el estado en el que se encuentra no es final no se aceptara.*/
+                if (palabra.equals("")) {
+                    if (getListaEstados().get(estado) instanceof EstadoFinal) {
+                        JOptionPane.showMessageDialog(null, "Palabra aceptada");
+                        System.out.println("Palabra aceptada");
+                    } else {
+                        System.out.println("Palabra no aceptada por no ser estado final");
+                        JOptionPane.showMessageDialog(null, "Palabra no aceptada");
+                    }
+                    break;
+                }
+
+            }
+
+
+            /*Si la palabra no es vacía no es aceptada*/
+            if (!palabra.equals("")) {
+                JOptionPane.showMessageDialog(null, "Palabra no aceptada");
+                System.out.println("Palabra no aceptada por tener condiciones");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "No hay estados");
+        }
+
+    }
+
+    public void llenarEstadosConCoicidencia(String palabra) {//funcion para llenar el array de estados, donde pasa por cada caracter que lee
 
         /*Variable que controla las filas, las cuales representan el estado en el que se encuentra el automata*/
-        int estado = 0;
-
-        /*Encontrar el estado inicial*/
-        for (int i = 0; i < getListaEstados().size(); i++) {
-            if (getListaEstados().get(i) instanceof EstadoInicial || getListaEstados().get(i) instanceof EstadoInicialFinal) {
-                estado = i;
-            }
-        }
+        int estado = encontrarEstadoInicial();
 
         /*Ciclo para comparar cada caracter*/
         int cont = 0;
-        while (palabra.length() != 0 && cont < getListaEstados().size()) {
+        int cont2 = 0;//contador para llenar el arrray
+
+        getEstadosConCoicidencia()[cont2] = estado;//le asgina al primer miembro del arrya el estado inicial
+        cont2++;
+        while (palabra.length() != 0 && cont < getListaEstados().size()) {//el mismo algoritmo que el de arriba
             if (getMatrizDeCondiciones()[estado][cont].length() > 2) {
 
                 String[] caracteres = getMatrizDeCondiciones()[estado][cont].split("[,]");
                 for (int i = 0; i < caracteres.length; i++) {
                     if (caracteres[i].equals(palabra.charAt(0) + "")) {
-                        System.out.print(palabra.charAt(0) + "");
+
                         palabra = palabra.substring(1, palabra.length());
                         estado = cont;
+                        getEstadosConCoicidencia()[cont2] = estado;
+                        cont2++;
                         cont = 0;
                         break;
                     }
@@ -178,34 +243,48 @@ public class AutomataFinito {
 
             } else {
                 if (getMatrizDeCondiciones()[estado][cont].equals(palabra.charAt(0) + "")) {//comprueba el primer caracter
-                    System.out.print(palabra.charAt(0) + " ");
+
                     palabra = palabra.substring(1, palabra.length()); //Desplaza la cadena quitando el primer caracter
                     estado = cont;
+                    getEstadosConCoicidencia()[cont2] = estado;
+                    cont2++;
                     cont = 0;
+
                 } else {
                     cont++;
                 }
 
             }
-            /*Pregunta si la palabra es vacia de ser asi se aceptara la palabra,
-             pero si el estado en el que se encuentra no es final no se aceptara.*/
-            if (palabra.equals("")) {
-                if (getListaEstados().get(estado) instanceof EstadoFinal) {
-                    System.out.println("Palabra aceptada");
-                } else {
-                    System.out.println("Palabra no aceptada por no ser estado final");
-                }
-                break;
+
+        }
+    }
+
+    public int encontrarEstadoInicial() {//funcion para encontrar el estado inicial
+
+        int estado = 0;
+
+        /*Encontrar el estado inicial*/
+        for (int i = 0; i < getListaEstados().size(); i++) {
+            if (getListaEstados().get(i) instanceof EstadoInicial || getListaEstados().get(i) instanceof EstadoInicialFinal) {
+                estado = i;
             }
-
         }
 
+        return estado;
+    }
 
-        /*Si la palabra no es vacía no es aceptada*/
-        if (!palabra.equals("")) {
-            System.out.println("Palabra no aceptada por tener condiciones");
+    public void resetColor() {//vuelve a su color original a los estados dentro del array EstadoConCoicidencia
+        for (int i = 0; i < getEstadosConCoicidencia().length; i++) {
+            getListaEstados().get(getEstadosConCoicidencia()[i]).setColorBackground(parent.color(81, 237, 236));
         }
+    }
 
+    public int[] getEstadosConCoicidencia() {
+        return estadosConCoicidencia;
+    }
+
+    public void setEstadosConCoicidencia(int[] estadosConCoicidencia) {
+        this.estadosConCoicidencia = estadosConCoicidencia;
     }
 
     public ArrayList<Estado> getListaEstados() {

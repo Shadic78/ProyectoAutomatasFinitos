@@ -1,8 +1,10 @@
 package controlador;
 
+import controlP5.Button;
 import controlP5.CallbackEvent;
 import controlP5.CallbackListener;
 import controlP5.ControlP5;
+import controlP5.Textfield;
 import controlP5.Toggle;
 import javax.swing.JOptionPane;
 import modelo.*;
@@ -15,6 +17,8 @@ public class ControladorVentana extends PApplet {
 
     // El objeto que usaremos para crear la interfaz de usuario
     ControlP5 ventana;
+    int cont = 0;
+    PApplet parent = new PApplet();
     CallbackListener cb;
     AutomataFinito automata1;
     EstadoDelPrograma controladorPrograma;
@@ -23,8 +27,8 @@ public class ControladorVentana extends PApplet {
 
     @Override
     public void settings() {
-        fullScreen();
-        //size(640, 480);
+        // fullScreen();
+        size(1200, 600);
     }
 
     @Override
@@ -55,6 +59,7 @@ public class ControladorVentana extends PApplet {
         textAlign(CENTER, CENTER);
         textSize(14);
         noStroke();
+
     }
 
     @Override
@@ -94,6 +99,7 @@ public class ControladorVentana extends PApplet {
     @Override
     public void mouseClicked() {
         String nombreEstado = " ";
+
         // Este if es para que no pongan vertices en el area donde estan los botones
         if (mouseX < width - 310) {
             // De acuerdo al estado del programa se hace una cosa u otra
@@ -162,15 +168,14 @@ public class ControladorVentana extends PApplet {
                         /**
                          * ***************************************************
                          * BORRAR CONEXION
-                         ***************************************************
+                         * **************************************************
                          */
                         if (controladorPrograma.isBorrandoConexion()) {
                             println("Borrando conexion");
-                        } 
-                        /**
+                        } /**
                          * ***************************************************
                          * AGREGAR CONEXION
-                         ***************************************************
+                         * **************************************************
                          */
                         else {
                             String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
@@ -191,9 +196,35 @@ public class ControladorVentana extends PApplet {
                     }
                     break;
 
-                case 12:
-                    String palabra = JOptionPane.showInputDialog("Ingresa una palabra");
-                    automata1.iniciarAutomata(palabra);
+                case 12://darle click al cuando el boton paso a paso este activo
+                    String palabra = ventana.get(Textfield.class, "txtPalabra").getText();//lee la palabra
+                    try {
+                        if (cont > 0) {//para regresar el color del estado anterior
+                            automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont - 1]).setColorBackground(parent.color(81, 237, 236));
+                        }
+                        automata1.llenarEstadosConCoicidencia(palabra);//funcion que rellena un array
+
+                        automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]).setColorBackground(parent.color(251, 186, 0));//cambia el estado a color amarrillo
+
+                        System.out.print(cont + ". " + automata1.getEstadosConCoicidencia()[cont] + " ");
+                        //System.out.print(cont + " ");
+                        if (cont > palabra.length()) {//para reiniciar el cont
+                            cont = 0;
+                            automata1.resetColor();
+                            break;
+                        }
+
+                        if (automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]) instanceof EstadoFinal && cont == palabra.length()) {
+                            JOptionPane.showMessageDialog(null, "Palabra aceptada", "Yes", 1);
+
+                        } else if (cont == palabra.length()) {
+                            JOptionPane.showMessageDialog(null, "Palabra No Aceptada");
+                        }
+                        cont++;
+
+                    } catch (IndexOutOfBoundsException ex) {
+                        JOptionPane.showMessageDialog(null, "No existe estados");
+                    }
                     break;
 
                 default:
@@ -224,9 +255,7 @@ public class ControladorVentana extends PApplet {
         }
     }
 
-    /**
-     ******** Funcion que controla los eventos de los objetos graficos ********
-     */
+    /* Funcion que controla los eventos de los objetos graficos*/
     public void controlEvent(CallbackEvent theEvent) {
         if (theEvent.getController().isMousePressed()) {
             // Si se presiono un boton toggle
@@ -297,6 +326,16 @@ public class ControladorVentana extends PApplet {
             popMatrix();
         }
         noFill();
+    }
+
+    //Funcion que controla el boton y empieza a comprobar la cadena
+    public void Submit() {
+
+        print("asdas");
+        String palabra = ventana.get(Textfield.class, "txtPalabra").getText();
+        automata1.iniciarAutomata(palabra);
+        print(palabra);
+
     }
 
 }

@@ -15,15 +15,15 @@ public class VentanaPrincipal {
     private PApplet parent;
     private int widthBtn;
     private int heightBtn;
-    private PFont fuenteMenu; 
-    
+    private PFont fuenteMenu;
+
     public VentanaPrincipal(PApplet p) {
         this.parent = p;
-        button = new ControlP5(p);       
+        button = new ControlP5(p);
         // Tamanio de los botones
         this.widthBtn = 110;
         this.heightBtn = 40;
-        this.fuenteMenu = parent.createFont("Fuentes/OpenSans-SemiBold.ttf", 14);           
+        this.fuenteMenu = parent.createFont("Fuentes/OpenSans-SemiBold.ttf", 14);
         // Se crean los botones
         setButtons(button, widthBtn, heightBtn);
     }
@@ -34,23 +34,22 @@ public class VentanaPrincipal {
                 .setColor(parent.color(255, 255, 255))
                 .setPosition(parent.width - (290 / 2) - 25, 10)
                 .setFont(parent.createFont("Fuentes/OpenSans-SemiBold.ttf", 16));
-        
+
         b.addLabel("Agregar estados")
                 .setColor(parent.color(159, 162, 166))
                 .setPosition(parent.width - (290 / 2) - 55, 50)
                 .setFont(fuenteMenu);
-        
+
         b.addLabel("Agregar conexiones")
                 .setColor(parent.color(159, 162, 166))
                 .setPosition(parent.width - (290 / 2) - 66, 262)
                 .setFont(fuenteMenu);
-        
+
         b.addLabel("Ejecutar automata")
                 .setColor(parent.color(159, 162, 166))
                 .setPosition(parent.width - (290 / 2) - 67, 410)
                 .setFont(fuenteMenu);
-        
-        
+
         // Botones
         b.addToggle("BtnAddEstadoInicial")
                 .setPosition(parent.width - 260, 80)
@@ -65,7 +64,7 @@ public class VentanaPrincipal {
                 .setSize(widthBtn, heightBtn)
                 .setLabel("Estado Normal")
                 .setId(2)
-                .setImages(parent.loadImage("EstadoNormal1.png"), parent.loadImage("EstadoNormal2.png"), parent.loadImage("EstadoNormal2.png"))                
+                .setImages(parent.loadImage("EstadoNormal1.png"), parent.loadImage("EstadoNormal2.png"), parent.loadImage("EstadoNormal2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
         b.addToggle("BtnAddEstadoFinal")
@@ -73,7 +72,7 @@ public class VentanaPrincipal {
                 .setSize(widthBtn, heightBtn)
                 .setLabel("Estado Final")
                 .setId(3)
-                .setImages(parent.loadImage("EstadoFinal1.png"), parent.loadImage("EstadoFinal2.png"), parent.loadImage("EstadoFinal2.png"))                                
+                .setImages(parent.loadImage("EstadoFinal1.png"), parent.loadImage("EstadoFinal2.png"), parent.loadImage("EstadoFinal2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
         b.addToggle("BtnAddEstadoInicialFinal")
@@ -81,7 +80,7 @@ public class VentanaPrincipal {
                 .setSize(widthBtn, heightBtn)
                 .setLabel("Estado Inicial-Final")
                 .setId(4)
-                .setImages(parent.loadImage("EstadoInicialFinal1.png"), parent.loadImage("EstadoInicialFinal2.png"), parent.loadImage("EstadoInicialFinal2.png"))                                               
+                .setImages(parent.loadImage("EstadoInicialFinal1.png"), parent.loadImage("EstadoInicialFinal2.png"), parent.loadImage("EstadoInicialFinal2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
         b.addToggle("BtnMoverEstado")
@@ -89,7 +88,7 @@ public class VentanaPrincipal {
                 .setSize(widthBtn, heightBtn)
                 .setLabel("Mover Estados")
                 .setId(5)
-                .setImages(parent.loadImage("MoverEstado1.png"), parent.loadImage("MoverEstado2.png"), parent.loadImage("MoverEstado2.png"))                                                
+                .setImages(parent.loadImage("MoverEstado1.png"), parent.loadImage("MoverEstado2.png"), parent.loadImage("MoverEstado2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
         b.addToggle("BtnBorrarEstado")
@@ -97,7 +96,7 @@ public class VentanaPrincipal {
                 .setSize(widthBtn, heightBtn)
                 .setLabel("Borrar Estado")
                 .setId(6)
-                .setImages(parent.loadImage("BorrarEstado1.png"), parent.loadImage("BorrarEstado2.png"), parent.loadImage("BorrarEstado2.png"))                                                               
+                .setImages(parent.loadImage("BorrarEstado1.png"), parent.loadImage("BorrarEstado2.png"), parent.loadImage("BorrarEstado2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
         b.addToggle("BtnAddConexionNormal")
@@ -105,7 +104,7 @@ public class VentanaPrincipal {
                 .setSize(widthBtn, heightBtn)
                 .setLabel("Conexion Normal")
                 .setId(7)
-                .setImages(parent.loadImage("ConexionNormal1.png"), parent.loadImage("ConexionNormal2.png"), parent.loadImage("ConexionNormal2.png"))                                                                               
+                .setImages(parent.loadImage("ConexionNormal1.png"), parent.loadImage("ConexionNormal2.png"), parent.loadImage("ConexionNormal2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
         b.addToggle("BtnAddConexionBucle")
@@ -113,7 +112,7 @@ public class VentanaPrincipal {
                 .setSize(widthBtn, heightBtn)
                 .setLabel("Conexion bucle")
                 .setId(9)
-                .setImages(parent.loadImage("ConexionBucle1.png"), parent.loadImage("ConexionBucle2.png"), parent.loadImage("ConexionBucle2.png"))                                                                                               
+                .setImages(parent.loadImage("ConexionBucle1.png"), parent.loadImage("ConexionBucle2.png"), parent.loadImage("ConexionBucle2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
         b.addToggle("BtnAddBorrarConexion")
@@ -121,11 +120,13 @@ public class VentanaPrincipal {
                 .setSize(widthBtn, heightBtn)
                 .setLabel("Borrar Conexion")
                 .setId(10)
-                .setImages(parent.loadImage("BorrarConexion1.png"), parent.loadImage("BorrarConexion2.png"), parent.loadImage("BorrarConexion2.png"))                                                                                                               
+                .setImages(parent.loadImage("BorrarConexion1.png"), parent.loadImage("BorrarConexion2.png"), parent.loadImage("BorrarConexion2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
 
-        /**** Objetos para ejecutar el automata ****/
-        b.addTextfield("Escribe tu palabra")
+        /**
+         * ** Objetos para ejecutar el automata ***
+         */
+        b.addTextfield("txtPalabra")
                 .setPosition(parent.width - 200, 440)
                 .setSize(110, 40)
                 .setColorBackground(parent.color(255, 255, 255))
@@ -134,19 +135,18 @@ public class VentanaPrincipal {
                 .setColorCursor(parent.color(159, 162, 166))
                 .setLabelVisible(false)
                 .setAutoClear(false);
-        
-        b.addBang("Iniciar/Detener")
+
+        b.addButton("Submit").setLabel("Comprobar")
                 .setPosition(parent.width - 80, 440)
-                .setSize(40, 40)
-                .setColorCaptionLabel(parent.color(159, 162, 166))
+                .setSize(50, 40)
+                .setColorCaptionLabel(parent.color(255, 255, 255))
                 .setColorBackground(parent.color(60, 150, 215));
-        
         b.addToggle("BtnAddPasoSiguiente")
                 .setPosition(parent.width - 200, 490)
                 .setSize(widthBtn, heightBtn)
-                .setLabel("Paso siguiente")
+                .setLabel("Paso a paso")
                 .setId(12)
-                .setImages(parent.loadImage("PasoSiguiente1.png"), parent.loadImage("PasoSiguiente2.png"), parent.loadImage("PasoSiguiente2.png"))                                                                                                                               
+                .setImages(parent.loadImage("PasoSiguiente1.png"), parent.loadImage("PasoSiguiente2.png"), parent.loadImage("PasoSiguiente2.png"))
                 .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER);
     }
 

@@ -16,12 +16,14 @@ public class EstadoDelPrograma {
      * 6 - Borrar estados
      * 7 - Agregar conexion normal (Al dar click a un estado el estado del programa cambia a 8)
      * 8 - (Dar click en el segundo estado para agregar una conexion)
-     * 9 - Agregar conexion bucle    
-     * 10 - 
-     * 11 - 
+     * 9 - Agregar conexion bucle
+     * 10 -
+     * 11 -
+     * 12 - Ejecutar el automata paso por paso
      */
+
     private int estadoDelPrograma = 0;
-	
+
     private PApplet parent;
     private ControlP5 ventana;
     // Variables para almacenar los estados a los que se les dio click
@@ -40,7 +42,7 @@ public class EstadoDelPrograma {
         this.estadoMoviendoID = -1;
         this.borrandoConexion = false;
     }
-		
+
     public int getEstadoClick1() {
         return estadoClick1;
     }
@@ -83,34 +85,32 @@ public class EstadoDelPrograma {
 
     // De acuerdo al estado del programa desactiva los otros botones
     public void actualizarEstadoDelPrograma(int estado) {
-        estadoDelPrograma = estado;            
-        
+        estadoDelPrograma = estado;
+
         // Obtiene una lista de los botones que hay en ventana
-        List listaBotones = ventana.getAll(Toggle.class);    
-        /* 
-        Desactiva los botones que no hayas presionado de acuerdo al estado del programa,
-        si el estado del programa es cero o 8 no desactiva nada, debido a que si el estado es cero
-        no hay nada que desactivar y si el estado es 8 significa que estas agregando una conexion 
-        y ya diste el primer click, por lo que el boton AgregarConexion debe mantenerse encendido
-        */
-        if(estadoDelPrograma != 0 && estadoDelPrograma != 8) {
-            for(int i = 0; i < listaBotones.size() ; i++) {
-                if( ((Toggle)listaBotones.get(i)).getId() != estadoDelPrograma) {
+        List listaBotones = ventana.getAll(Toggle.class);
+        /*
+         Desactiva los botones que no hayas presionado de acuerdo al estado del programa,
+         si el estado del programa es cero o 8 no desactiva nada, debido a que si el estado es cero
+         no hay nada que desactivar y si el estado es 8 significa que estas agregando una conexion
+         y ya diste el primer click, por lo que el boton AgregarConexion debe mantenerse encendido
+         */
+        if (estadoDelPrograma != 0 && estadoDelPrograma != 8) {
+            for (int i = 0; i < listaBotones.size(); i++) {
+                if (((Toggle) listaBotones.get(i)).getId() != estadoDelPrograma) {
                     // Si el estado es 10 y no se esta borrando una conexion entonces se desactiva el btn de borrar conexion
-                    if( ((Toggle)listaBotones.get(i)).getId() == 10 ) {
-                        if(!borrandoConexion) {
-                            ((Toggle)listaBotones.get(i)).setState(false);                                                    
+                    if (((Toggle) listaBotones.get(i)).getId() == 10) {
+                        if (!borrandoConexion) {
+                            ((Toggle) listaBotones.get(i)).setState(false);
                         }
+                    } else {
+                        ((Toggle) listaBotones.get(i)).setState(false);
                     }
-                    else {
-                        ((Toggle)listaBotones.get(i)).setState(false);                                              
-                    }
+                } // Si el estado es 7 y se esta borrando una conexion se desactiva el btn de agregar conexion
+                else if (((Toggle) listaBotones.get(i)).getId() == 7 && borrandoConexion) {
+                    ((Toggle) listaBotones.get(i)).setState(false);
                 }
-                // Si el estado es 7 y se esta borrando una conexion se desactiva el btn de agregar conexion
-                else if(((Toggle)listaBotones.get(i)).getId() == 7 && borrandoConexion) {
-                    ((Toggle)listaBotones.get(i)).setState(false);                                           
-                }
-            }            
+            }
         }
 
     }
@@ -122,5 +122,5 @@ public class EstadoDelPrograma {
     public void setBorrandoConexion(boolean borrandoConexion) {
         this.borrandoConexion = borrandoConexion;
     }
-        
+
 }
