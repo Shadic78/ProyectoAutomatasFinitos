@@ -178,8 +178,12 @@ public class ControladorVentana extends PApplet {
                          * **************************************************
                          */
                         else {
-                            String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                            automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);
+                            try {
+                                String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
+                                automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);
+                            } catch (NullPointerException ex) {
+                                JOptionPane.showMessageDialog(null, "Error ingrese una condicion");
+                            }
                         }
                         controladorPrograma.setEstadoClick1(-1);
                         controladorPrograma.setEstadoClick2(-1);
@@ -191,8 +195,11 @@ public class ControladorVentana extends PApplet {
                     if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick1(automata1.getEstadoClickeado());
                         String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                        automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick1(), condicion);
-                        controladorPrograma.setEstadoClick1(-1);
+                        if (condicion != null) {
+                            automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick1(), condicion);
+                            controladorPrograma.setEstadoClick1(-1);
+                        }
+
                     }
                     break;
 
@@ -330,8 +337,6 @@ public class ControladorVentana extends PApplet {
 
     //Funcion que controla el boton y empieza a comprobar la cadena
     public void Submit() {
-
-        print("asdas");
         String palabra = ventana.get(Textfield.class, "txtPalabra").getText();
         automata1.iniciarAutomata(palabra);
         print(palabra);
