@@ -27,8 +27,8 @@ public class ControladorVentana extends PApplet {
 
     @Override
     public void settings() {
-        // fullScreen();
-        size(1200, 600);
+        fullScreen();
+        //size(1200, 600);
     }
 
     @Override
