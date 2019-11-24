@@ -184,18 +184,6 @@ public class AutomataFinito {
                     }
 
                 }
-                /*Pregunta si la palabra es vacia de ser asi se aceptara la palabra,
-                 pero si el estado en el que se encuentra no es final no se aceptara.*/
-                if (palabra.equals("")) {
-                    if (getListaEstados().get(estado) instanceof EstadoFinal) {
-                        JOptionPane.showMessageDialog(null, "Palabra aceptada");
-                        System.out.println("Palabra aceptada");
-                    } else {
-                        System.out.println("Palabra no aceptada por no ser estado final");
-                        JOptionPane.showMessageDialog(null, "Palabra no aceptada");
-                    }
-                    break;
-                }
 
             }
 
@@ -204,6 +192,17 @@ public class AutomataFinito {
             if (!palabra.equals("")) {
                 JOptionPane.showMessageDialog(null, "Palabra no aceptada");
                 System.out.println("Palabra no aceptada por tener condiciones");
+            } else {
+                /*Pregunta si la palabra es vacia de ser asi se aceptara la palabra,
+                 pero si el estado en el que se encuentra no es final no se aceptara.*/
+                if (getListaEstados().get(estado) instanceof EstadoFinal) {
+                    JOptionPane.showMessageDialog(null, "Palabra aceptada");
+                    System.out.println("Palabra aceptada");
+                } else {
+                    System.out.println("Palabra no aceptada por no ser estado final");
+                    JOptionPane.showMessageDialog(null, "Palabra no aceptada");
+                }
+
             }
 
         } else {
@@ -214,7 +213,7 @@ public class AutomataFinito {
 
     public void llenarEstadosConCoicidencia(String palabra) {//funcion para llenar el array de estados, donde pasa por cada caracter que lee
 
-        /*Variable que controla las filas, las cuales representan el estado en el que se encuentra el automata*/
+        /* */
         int estado = encontrarEstadoInicial();
 
         /*Ciclo para comparar cada caracter*/
@@ -269,8 +268,23 @@ public class AutomataFinito {
                 estado = i;
             }
         }
-
         return estado;
+    }
+
+    public boolean estadoInicialUnico() {//funcion para encontrar el estado inicial
+        boolean estadoUnico = true;
+        int cont = 0;
+
+        /*Encontrar el estado inicial*/
+        for (int i = 0; i < getListaEstados().size(); i++) {
+            if (getListaEstados().get(i) instanceof EstadoInicial || getListaEstados().get(i) instanceof EstadoInicialFinal) {
+                cont++;
+            }
+        }
+        if (cont > 0) {
+            estadoUnico = false;
+        }
+        return estadoUnico;
     }
 
     public void resetColor() {//vuelve a su color original a los estados dentro del array EstadoConCoicidencia

@@ -105,13 +105,18 @@ public class ControladorVentana extends PApplet {
             // De acuerdo al estado del programa se hace una cosa u otra
             switch (controladorPrograma.getEstadoDelPrograma()) {
                 case 1: // Agregar estado inicial
-                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
-                    if (nombreEstado != null) {
-                        EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY), nombreEstado);
-                        automata1.agregarEstado(estadoInicial);
 
+                    if (automata1.estadoInicialUnico()) {
+                        nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                        if (nombreEstado != null) {
+                            EstadoInicial estadoInicial = new EstadoInicial(this, new Punto(mouseX, mouseY), nombreEstado);
+                            automata1.agregarEstado(estadoInicial);
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Debe de ingresar un nombre");
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Debe de ingresar un nombre");
+                        JOptionPane.showMessageDialog(null, "Ya exite estado inicial");
                     }
 
                     break;
@@ -137,12 +142,17 @@ public class ControladorVentana extends PApplet {
                     break;
 
                 case 4: // Agregar estado inicial-final
-                    nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
-                    if (nombreEstado != null) {
-                        EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY), nombreEstado);
-                        automata1.agregarEstado(estadoInicialFinal);
+                    if (automata1.estadoInicialUnico()) {
+
+                        nombreEstado = JOptionPane.showInputDialog("Ingrese nombre:");
+                        if (nombreEstado != null) {
+                            EstadoInicialFinal estadoInicialFinal = new EstadoInicialFinal(this, new Punto(mouseX, mouseY), nombreEstado);
+                            automata1.agregarEstado(estadoInicialFinal);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Debe de ingresar un nombre");
+                        }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Debe de ingresar un nombre");
+                        JOptionPane.showMessageDialog(null, "Ya existe estado Inicial");
                     }
                     break;
 
@@ -179,7 +189,11 @@ public class ControladorVentana extends PApplet {
                          */
                         else {
                             String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                            automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);
+                            if (condicion != null && !"".equals(condicion)) {
+                                automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Ingrese una condicion valida");
+                            }
                         }
                         controladorPrograma.setEstadoClick1(-1);
                         controladorPrograma.setEstadoClick2(-1);
@@ -191,8 +205,13 @@ public class ControladorVentana extends PApplet {
                     if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick1(automata1.getEstadoClickeado());
                         String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                        automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick1(), condicion);
-                        controladorPrograma.setEstadoClick1(-1);
+                        if (condicion != null && !"".equals(condicion)) {
+                            automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick1(), condicion);
+                            controladorPrograma.setEstadoClick1(-1);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Ingrese una condicion valida");
+                        }
+
                     }
                     break;
 
@@ -206,19 +225,16 @@ public class ControladorVentana extends PApplet {
 
                         automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]).setColorBackground(parent.color(251, 186, 0));//cambia el estado a color amarrillo
 
-                        System.out.print(cont + ". " + automata1.getEstadosConCoicidencia()[cont] + " ");
-                        //System.out.print(cont + " ");
-                        if (cont > palabra.length()) {//para reiniciar el cont
-                            cont = 0;
-                            automata1.resetColor();
-                            break;
-                        }
-
                         if (automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]) instanceof EstadoFinal && cont == palabra.length()) {
-                            JOptionPane.showMessageDialog(null, "Palabra aceptada", "Yes", 1);
+                            JOptionPane.showMessageDialog(null, "Palabra aceptada");
 
                         } else if (cont == palabra.length()) {
                             JOptionPane.showMessageDialog(null, "Palabra No Aceptada");
+                        }
+                        if (cont > palabra.length()) {
+                            automata1.resetColor();
+                            cont = 0;
+                            break;
                         }
                         cont++;
 
@@ -330,8 +346,6 @@ public class ControladorVentana extends PApplet {
 
     //Funcion que controla el boton y empieza a comprobar la cadena
     public void Submit() {
-
-        print("asdas");
         String palabra = ventana.get(Textfield.class, "txtPalabra").getText();
         automata1.iniciarAutomata(palabra);
         print(palabra);
