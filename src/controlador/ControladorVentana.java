@@ -182,6 +182,11 @@ public class ControladorVentana extends PApplet {
                          */
                         if (controladorPrograma.isBorrandoConexion()) {
                             println("Borrando conexion");
+                            String palabra = ventana.get(Textfield.class, "txtPalabra").getText();;
+                            int estadoOrigen = controladorPrograma.getEstadoClick1();
+                            int estadoDestino = controladorPrograma.getEstadoClick2();
+                            automata1.eliminarUnaConexion(estadoOrigen, estadoDestino);
+
                         } /**
                          * ***************************************************
                          * AGREGAR CONEXION
@@ -217,12 +222,11 @@ public class ControladorVentana extends PApplet {
 
                 case 12://darle click al cuando el boton paso a paso este activo
                     String palabra = ventana.get(Textfield.class, "txtPalabra").getText();//lee la palabra
+                    automata1.llenarEstadosConCoicidencia(palabra);//funcion que rellena un array
                     try {
                         if (cont > 0) {//para regresar el color del estado anterior
                             automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont - 1]).setColorBackground(parent.color(81, 237, 236));
                         }
-                        automata1.llenarEstadosConCoicidencia(palabra);//funcion que rellena un array
-
                         automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]).setColorBackground(parent.color(251, 186, 0));//cambia el estado a color amarrillo
 
                         if (automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]) instanceof EstadoFinal && cont == palabra.length()) {

@@ -291,6 +291,21 @@ public class AutomataFinito {
         }
     }
 
+    public void eliminarUnaConexion(int estadoOrigen, int estadoDestino) {
+        for (int i = 0; i < getListaConexiones().size(); i++) {
+            if (getListaConexiones().get(i).getOrigen().equals(getListaEstados().get(estadoOrigen))
+                    && getListaConexiones().get(i).getDestino().equals(getListaEstados().get(estadoDestino))) {
+                getListaConexiones().remove(i);
+                break;
+            }
+        }
+        getMatrizDeCondiciones()[estadoOrigen][estadoDestino] = "-";
+        for (int i = 0; i < getEstadosConCoicidencia().length; i++) {
+            getEstadosConCoicidencia()[i] = 0;
+        }
+        imprimirMatriz();
+    }
+
     public int[] getEstadosConCoicidencia() {
         return estadosConCoicidencia;
     }
