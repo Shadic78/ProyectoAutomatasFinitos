@@ -27,8 +27,8 @@ public class ControladorVentana extends PApplet {
 
     @Override
     public void settings() {
-        // fullScreen();
-        size(1200, 600);
+        fullScreen();
+        //size(1200, 600);
     }
 
     @Override
@@ -182,6 +182,11 @@ public class ControladorVentana extends PApplet {
                          */
                         if (controladorPrograma.isBorrandoConexion()) {
                             println("Borrando conexion");
+                            String palabra = ventana.get(Textfield.class, "txtPalabra").getText();;
+                            int estadoOrigen = controladorPrograma.getEstadoClick1();
+                            int estadoDestino = controladorPrograma.getEstadoClick2();
+                            automata1.eliminarUnaConexion(estadoOrigen, estadoDestino);
+
                         } /**
                          * ***************************************************
                          * AGREGAR CONEXION
@@ -189,7 +194,7 @@ public class ControladorVentana extends PApplet {
                          */
                         else {
                             String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                            if (condicion != null && !"".equals(condicion)) {
+                            if (condicion != null && !"".equals(condicion) && !condicion.contains(" ")) {
                                 automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Ingrese una condicion valida");
@@ -205,7 +210,7 @@ public class ControladorVentana extends PApplet {
                     if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick1(automata1.getEstadoClickeado());
                         String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                        if (condicion != null && !"".equals(condicion)) {
+                        if (condicion != null && !"".equals(condicion) && !condicion.contains(" ")) {
                             automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick1(), condicion);
                             controladorPrograma.setEstadoClick1(-1);
                         } else {
@@ -217,12 +222,11 @@ public class ControladorVentana extends PApplet {
 
                 case 12://darle click al cuando el boton paso a paso este activo
                     String palabra = ventana.get(Textfield.class, "txtPalabra").getText();//lee la palabra
+                    automata1.llenarEstadosConCoicidencia(palabra);//funcion que rellena un array
                     try {
                         if (cont > 0) {//para regresar el color del estado anterior
                             automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont - 1]).setColorBackground(parent.color(81, 237, 236));
                         }
-                        automata1.llenarEstadosConCoicidencia(palabra);//funcion que rellena un array
-
                         automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]).setColorBackground(parent.color(251, 186, 0));//cambia el estado a color amarrillo
 
                         if (automata1.getListaEstados().get(automata1.getEstadosConCoicidencia()[cont]) instanceof EstadoFinal && cont == palabra.length()) {
@@ -239,7 +243,7 @@ public class ControladorVentana extends PApplet {
                         cont++;
 
                     } catch (IndexOutOfBoundsException ex) {
-                        JOptionPane.showMessageDialog(null, "No existe estados");
+                        JOptionPane.showMessageDialog(null, "No hay estados");
                     }
                     break;
 
