@@ -189,7 +189,7 @@ public class ControladorVentana extends PApplet {
                          */
                         else {
                             String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                            if (condicion != null && !"".equals(condicion)) {
+                            if (condicion != null && !"".equals(condicion) && !condicion.contains(" ")) {
                                 automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick2(), condicion);
                             } else {
                                 JOptionPane.showMessageDialog(null, "Ingrese una condicion valida");
@@ -205,7 +205,7 @@ public class ControladorVentana extends PApplet {
                     if (automata1.getEstadoClickeado() >= 0) {
                         controladorPrograma.setEstadoClick1(automata1.getEstadoClickeado());
                         String condicion = JOptionPane.showInputDialog("Ingresa la condicion:");
-                        if (condicion != null && !"".equals(condicion)) {
+                        if (condicion != null && !"".equals(condicion) && !condicion.contains(" ")) {
                             automata1.agregarConexion(controladorPrograma.getEstadoClick1(), controladorPrograma.getEstadoClick1(), condicion);
                             controladorPrograma.setEstadoClick1(-1);
                         } else {
@@ -239,7 +239,7 @@ public class ControladorVentana extends PApplet {
                         cont++;
 
                     } catch (IndexOutOfBoundsException ex) {
-                        JOptionPane.showMessageDialog(null, "No existe estados");
+                        JOptionPane.showMessageDialog(null, "No hay estados");
                     }
                     break;
 

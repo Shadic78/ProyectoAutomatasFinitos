@@ -182,19 +182,17 @@ public class AutomataFinito {
                     } else {
                         cont++;
                     }
-
                 }
-
             }
-
-
             /*Si la palabra no es vacía no es aceptada*/
             if (!palabra.equals("")) {
                 JOptionPane.showMessageDialog(null, "Palabra no aceptada");
                 System.out.println("Palabra no aceptada por tener condiciones");
+
             } else {
                 /*Pregunta si la palabra es vacia de ser asi se aceptara la palabra,
                  pero si el estado en el que se encuentra no es final no se aceptara.*/
+
                 if (getListaEstados().get(estado) instanceof EstadoFinal) {
                     JOptionPane.showMessageDialog(null, "Palabra aceptada");
                     System.out.println("Palabra aceptada");
@@ -202,7 +200,6 @@ public class AutomataFinito {
                     System.out.println("Palabra no aceptada por no ser estado final");
                     JOptionPane.showMessageDialog(null, "Palabra no aceptada");
                 }
-
             }
 
         } else {
@@ -271,16 +268,17 @@ public class AutomataFinito {
         return estado;
     }
 
-    public boolean estadoInicialUnico() {//funcion para encontrar el estado inicial
+    public boolean estadoInicialUnico() {//funcion para controlar que solo haya un estado inicial
         boolean estadoUnico = true;
         int cont = 0;
 
-        /*Encontrar el estado inicial*/
+        /*verifica y cuenta los estados iniciales*/
         for (int i = 0; i < getListaEstados().size(); i++) {
             if (getListaEstados().get(i) instanceof EstadoInicial || getListaEstados().get(i) instanceof EstadoInicialFinal) {
                 cont++;
             }
         }
+        /*Si ya no es unico returno false*/
         if (cont > 0) {
             estadoUnico = false;
         }
