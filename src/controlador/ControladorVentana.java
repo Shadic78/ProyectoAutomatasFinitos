@@ -81,8 +81,8 @@ public class ControladorVentana extends PApplet {
 
         fill(0, 0, 0);
         textSize(16);
-        text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);
-        text("Borrando conexion: " + controladorPrograma.isBorrandoConexion(), width / 2, height - 60);
+        //text("Estado del programa: " + controladorPrograma.getEstadoDelPrograma(), width / 2, height - 80);
+        //text("Borrando conexion: " + controladorPrograma.isBorrandoConexion(), width / 2, height - 60);
 
         /*Funcion que dibuja una linea de referencia para insertar una conexion*/
         if (controladorPrograma.getEstadoDelPrograma() == 8) {
